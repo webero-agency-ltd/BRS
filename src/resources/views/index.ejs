@@ -1,0 +1,37 @@
+<!DOCTYPE>
+
+<html>
+
+	<head>
+		<link rel="stylesheet" href="/assets/css/knacss-unminified.css">
+		<link rel="stylesheet" href="/assets/css/index.css">
+	</head>
+
+	<body>
+		
+		<!-- Il y a des erreurs -->
+		<div class="txtcenter">
+			<h1><%= locals.lang.title %></h1><br>
+		</div>
+		<% if( locals.erreur ) { %>
+
+			<main class="container center-b bspace-6">
+			
+				<section class="autogrid section-title">
+					<div class="txtcenter">
+						<div class="alert--danger"><%= locals.erreur %></div>
+					</div>
+				</section>
+
+			</main>
+		<% } %>
+
+		<!-- Tout est OK il ny a pas d'erreur -->
+		<% if( !locals.erreur ) { %>
+		<div id="app">
+		</div>
+		<% } %>
+		<script src="/assets/js/contacts.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE>
+
+<html>
+
+	<head>
+		<link rel="stylesheet" href="/assets/css/knacss-unminified.css">
+		<link rel="stylesheet" href="/assets/css/index.css">
+	</head>
+
+	<body>
+		 
+		<main class="container center-b bspace-6">
+			
+			<section class="autogrid section-title">
+				<div class="txtcenter">
+					<h1><%= locals.lang.title %></h1><br>
+					<p><%= locals.lang.subtitle %></p>
+				</div>
+			</section>
+
+			<section class="autogrid section-form">
+			    <div class="form-content center-b">
+					<form action="#">
+						<ul class="is-unstyled">
+						    <li class="form-item">
+						      	<input id="input-id" class="form-input" type="text" placeholder="<%= locals.lang.user %>">
+						    </li>
+						    <li class="form-item">
+						      	<input id="input-pass" class="form-input" type="password" placeholder="<%= locals.lang.pass %>">
+						      	<span class="form-error"><%= locals.lang.user_error %></span>
+						    </li>
+						    <li class="form-item">
+						      	<input id="input-remember" type="checkbox" class="radio" name="radio" id="r1">
+						      	<label for="r1"><%= locals.lang.remember %></label>
+						    </li>
+						</ul>
+					</form>
+			    </div>
+			</section>
+
+			<div class="txtcenter">
+				<button id="submit-button" class="btn--primary btn-large">
+					<%= locals.lang.remember %>
+					<div style="font-size:16px" class="ld ld-ring ld-cycle"></div>
+				</button>
+			</div>
+
+			<div class="txtcenter tspace-6">
+			    <span><a class="under-hov col-hov" href="#"><%= locals.lang.remember %></a></span> | <span><a class="under-hov col-hov" href="#"><%= locals.lang.sign_up %></a></span>
+			    
+			</div>
+
+		</main>
+		
+		<script src="/assets/js/login.js"></script>
+	</body>
+
+</html>

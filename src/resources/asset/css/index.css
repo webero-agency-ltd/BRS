@@ -1,0 +1,207 @@
+
+/*
+*	Stylisation des containeur 
+*/
+
+.tspace-6{
+	margin-top: 6rem;
+}
+
+.bspace-6{
+	margin-bottom: 6rem; 
+}
+
+.center-b{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.container{
+	max-width: 100% ; 
+	max-width: 800px;
+}
+
+.section-title{
+	padding: 3rem 0rem;
+}
+
+@media (min-width: 576px)
+{
+	h1{
+		font-size: 4.2rem;
+	}
+
+	.section-title p {
+		font-size: 2.1rem;
+	}
+}
+
+/*
+* Stylisation de la formulaire 
+*/
+
+.form-content{
+	width: 80%;
+    max-width: 540px;
+}
+
+.form-item{
+	width: 100%;
+	padding: 1.5rem 0rem;
+}
+
+.form-item input[type="text"],.form-item input[type="password"]{
+	width: 100%;
+}
+
+.form-input{
+	outline: none;
+	box-shadow: none;
+	border-bottom: 2px solid rgba( 0,0,0,0.6);
+	background: rgba(16, 16, 16, 0.02);
+	padding: 1.1rem 1rem;
+}
+
+.form-input:focus{
+	border-color:  #0056B9 ; 
+}
+
+.form-input.error{
+	border-color:  #B92D00 ;
+}
+
+.form-input.error + .form-error{
+	display: block;
+}
+
+.form-error{
+	display: none;
+	width: 100%;
+	color: #B92D00 ; 
+	position: relative;
+	margin-top: 1rem;
+}
+
+.form-error::after{
+	
+	content: '!' ;
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: center;
+	height: 0;
+	width: 20px;
+	border-style: solid;
+	border-width: 0px 9px 20px 9px;
+	border-color: transparent transparent #B92D00 transparent;
+	color: #FFF ; 
+
+}
+
+.radio:checked{
+	background-image : url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20standalone%3D%22no%22%3F%3E%3Csvg%20version%3D%221.1%22%20width%3D%22100%22%20height%3D%22100%22%0AviewBox%3D%220%200%2080%2080%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2240%22%20r%3D%2224%22%20style%3D%22fill%3A%230056B9%22/%3E%3C/svg%3E") !important;
+}
+
+.btn-large{
+	padding: 1.5rem 5.5rem;
+}
+
+.btn--primary, .button--primary {
+    background-color: #0275D8;
+    position: relative;
+    outline: none !important;
+}
+
+.btn--primary:disabled{
+	background-color: #0275D8;
+	opacity: 0.7 !important ; 
+	filter: none
+}
+
+
+a.under-hov{
+	text-decoration: none;
+}
+
+a.under-hov:hover{
+	text-decoration: underline;
+}
+
+a.col-hov{
+	color: rgba(0,0,0,0.55);
+}
+
+a.col-hov:hover{
+	color: rgba(0,0,0,0.75);
+}
+
+
+
+/*
+*	Stylisation d'un loader en CSS 
+*/
+.ld{
+	position: absolute;
+	left: 50%;
+	top: 10px;
+	transform: translateX( -50% ) ;
+	display: none;
+}
+
+.ld.ld-cycle {
+    -webkit-animation: ld-cycle 1s infinite linear;
+    animation: ld-cycle 1s infinite linear;
+}
+
+.ld-ring {
+    width: 1.1em;
+    height: 1.1em;
+    color: inherit;
+}
+
+.ld-ring:after {
+    -webkit-background-clip: padding-box;
+    box-sizing: border-box;
+    border-width: .15em;
+    border-color: currentColor currentColor currentColor transparent;
+}
+
+.ld-hourglass:after, .ld-pie:after, .ld-ring:after {
+    border-radius: 50%;
+    border-style: solid;
+}
+
+.ld-ball:after, .ld-hourglass:after, .ld-ring:after {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: " ";
+    display: inline-block;
+    background: center center no-repeat;
+    background-size: cover;
+}
+
+.ld-ball:after, .ld-ring:after {
+    width: 18px;
+    height: 18px;
+}
+
+@keyframes ld-cycle{
+	0% { 
+		-webkit-transform: rotate(0);
+    	transform: rotate(0);
+	}
+
+	50% { 
+		-webkit-transform: rotate(180deg);
+    	transform: rotate(180deg);
+	}
+
+	100% { 
+		-webkit-transform: rotate(360deg);
+    	transform: rotate(360deg);
+	}
+}
