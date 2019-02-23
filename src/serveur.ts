@@ -11,7 +11,7 @@ const app = express() ;
 
 app.set('views', path.join(__dirname, 'resources/views'));
 
-app.set('view enginer','ejs')
+app.set('view enginer','ejs') 
 
 export default class Serveur{
  

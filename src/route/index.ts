@@ -13,7 +13,11 @@ export default async function () : Promise<typeRouter[]> {
 	await app.get('/sinup','sinup') ; 
 
 	//route administrateur 
-	await app.get('/admin','admin') ; 
+	await app.get('/admin','admin/index') ; 
+
+	// admin ajoute de tag et 
+	await app.get('/admin/tags','admin/tags/find') ; 
+	await app.post('/admin/tags','admin/tags/create') ; 
 
 	await app.get('/token','ifstToken') ; 
 
@@ -21,6 +25,8 @@ export default async function () : Promise<typeRouter[]> {
 	*	Récupération Affilier des utilisateur
 	*/
 	await app.get('/affilier','infusionsoft/affilier') ; 
+
+
 	
 	// Retourne de tout les route indiqué a la base du serveur pour le crée ensuite sur express js
 	return new Promise<typeRouter[]>( resolve => resolve( app.verbe ));

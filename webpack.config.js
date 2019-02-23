@@ -13,6 +13,8 @@ module.exports = {
 	entry: {
 	    login : resolve('./script/pages/login'),
 	    contacts : resolve('./script/pages/contacts'),
+	    admin : resolve('./script/pages/admin'),
+	    index : resolve('./script/pages/index'),
 	},
 
 	mode: 'development' ,  
@@ -24,7 +26,9 @@ module.exports = {
 	},
 
 	resolve: {
-	    extensions: ['.ts','.tsx','.js'] 
+	    
+	    extensions: ['.ts','.tsx','.js'] ,
+
 	},
 
 	module: {

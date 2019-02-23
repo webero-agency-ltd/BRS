@@ -7,7 +7,7 @@ class route {
 	
 	constructor() {
 		this._verbe = [] ; 
-	}
+	} 
 
 	add( obj : typeRouter ){
 		this._verbe.push(obj)

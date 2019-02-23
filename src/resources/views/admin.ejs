@@ -1,34 +1,23 @@
 <!DOCTYPE>
 
-<html>
+<html lang="fr">
 
 	<head>
-		<link rel="stylesheet" href="/assets/css/knacss-unminified.css">
-		<link rel="stylesheet" href="/assets/css/index.css">
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/assets/css/admin.css">
 	</head>
 
 	<body>
-		 
-		<main class="container center-b bspace-6 txtcenter">
-			
-			<% if( locals.erreur ) { %>
-			<div class="alert--danger"><%= locals.erreur %></div>
-			<% } %>
-			
-			<% if( ! locals.ifstToken ) { %>
-				<a href="<%= locals.ifstAuthUrl %>" class="btn--primary btn-large tspace-6 ">
-					<%= locals.lang.button %>
-					<div style="font-size:16px" class="ld ld-ring ld-cycle"></div>
-				</a>
-			<% } else{%>
-				<button id="submit-button" class="btn--success btn-large tspace-6 ">
-					<%= locals.lang.success %>
-					<div style="font-size:16px" class="ld ld-ring ld-cycle"></div>
-				</button> 
-			<% } %>
 
-			
-		</main>
+		<script>
+			window.isToken=<%= !locals.erreur %>;
+			window.trans= <%- lang.replace(/=&gt;/g, '=>') %>  ; 
+		</script>
+
+		<div id="app"></div>
+		
+		<script src="/assets/js/admin.js"></script>
 
 	</body>
 

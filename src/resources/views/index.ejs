@@ -9,11 +9,12 @@
 
 	<body>
 		
-		<!-- Il y a des erreurs -->
-		<div class="txtcenter">
-			<h1><%= locals.lang.title %></h1><br>
-		</div>
+		<!-- Il y a des erreurs -->		
 		<% if( locals.erreur ) { %>
+
+			<div class="txtcenter">
+				<h1><%= locals.lang.title %></h1><br>
+			</div>
 
 			<main class="container center-b bspace-6">
 			
@@ -28,10 +29,9 @@
 
 		<!-- Tout est OK il ny a pas d'erreur -->
 		<% if( !locals.erreur ) { %>
-		<div id="app">
-		</div>
+		<div id="app"></div>
 		<% } %>
-		<script src="/assets/js/contacts.js"></script>
+		<script src="/assets/js/index.js"></script>
 	</body>
 
 </html>

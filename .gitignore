@@ -1,5 +1,6 @@
 feuille.txt
 sftp-config.json
 package-lock.json
+readme.rd
 node_modules/*
 dist/* 

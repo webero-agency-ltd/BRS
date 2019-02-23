@@ -1,6 +1,5 @@
 import * as React from 'react'
 import reactDom from 'react-dom'
-import Tableaux from './comp/tableaux'
 
 import Button from 'react-bootstrap/Button';
 
@@ -14,7 +13,7 @@ declare global {
 
 reactDom.render(
 
-	<Tableaux/> , 
+	<div></div> , 
 	document.getElementById('app') as Element
 
 )
