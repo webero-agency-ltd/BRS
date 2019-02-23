@@ -18,13 +18,14 @@ module.exports = function ( req : Request , res : Response , next : NextFunction
 	req.ifstInitToken = function () {
 
 		let token = sdk.getToken() ; 
-		res.locals.ifstAuthUrl = sdk.getUrlAuht() ;
+		res.locals.urlFindToken = sdk.getUrlAuht() ;
  
 		if ( Object.keys( token ).length > 0 ) {
 			res.locals.ifstToken = token ; 
 			res.locals.erreur = false ; 
 			return true ;
 		}
+		res.locals.erreur = true ; 
 		res.locals.ifstToken = false ; 
 		return false ;
 	

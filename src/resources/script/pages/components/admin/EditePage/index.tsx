@@ -119,7 +119,6 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 					      	<option value="1" >{lang('modalSelect1')}</option>
 					      	<option value="2" >{lang('modalSelect2')}</option>
 					     	<option value="3" >{lang('modalSelect3')}</option>
-					      	<option value="4" >{lang('modalSelect4')}</option>
 					    </Form.Control>
 					</Form.Group>
 

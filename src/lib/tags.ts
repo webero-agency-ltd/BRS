@@ -16,14 +16,19 @@ export let set = function ( data : object , cbl : CallableFunction ) {
 }
 
 
-export let find = function ( cbl : CallableFunction ) {
+export let find = function () : Promise <object> {
 
-	if (fs.existsSync( file )) {
-		let token = fs.readFileSync( file ).toString() ;
-		if ( Object.keys( token ).length>0 ) {
-			return cbl( JSON.parse( token ) ) ;
+	return new Promise<object>( (resolve) => { 
+
+		if (fs.existsSync( file )) {
+			let token = fs.readFileSync( file ).toString() ;
+			if ( Object.keys( token ).length>0 ) {
+				return resolve( JSON.parse( token ) ) ;
+			}
 		}
-	}
-	return cbl( false ) ; 
+		return resolve( {} ) ; 
+
+	});
+
 
 }

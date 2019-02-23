@@ -3,7 +3,7 @@
 <html>
 
 	<head>
-		<link rel="stylesheet" href="/assets/css/knacss-unminified.css">
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/assets/css/index.css">
 	</head>
 
@@ -12,17 +12,15 @@
 		<!-- Il y a des erreurs -->		
 		<% if( locals.erreur ) { %>
 
-			<div class="txtcenter">
+			<div style="text-align: center;">
 				<h1><%= locals.lang.title %></h1><br>
 			</div>
 
 			<main class="container center-b bspace-6">
-			
-				<section class="autogrid section-title">
-					<div class="txtcenter">
-						<div class="alert--danger"><%= locals.erreur %></div>
-					</div>
-				</section>
+
+				<div class="alert alert-danger" role="alert">
+				  	<%= locals.erreur %>
+				</div>
 
 			</main>
 		<% } %>
@@ -30,8 +28,8 @@
 		<!-- Tout est OK il ny a pas d'erreur -->
 		<% if( !locals.erreur ) { %>
 		<div id="app"></div>
-		<% } %>
 		<script src="/assets/js/index.js"></script>
+		<% } %>
 	</body>
 
 </html>

@@ -20,6 +20,7 @@ declare global {
     interface Window { 
     	trans: object;
     	isToken: boolean;
+    	urlFindToken: string;
     }
 
 }
@@ -75,6 +76,7 @@ class Application extends React.Component <appProps , appState>{
 	}
 
 	render(){
+
 
 		const { Modale , modalComps , modalTitle } = this.state
 

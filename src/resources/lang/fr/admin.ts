@@ -22,9 +22,8 @@ module.exports = {
 	modalEditTag : 'Edit' , 
 	modalDelTag : 'Delete' ,
 	 
-	modalSelect1 : 'Avec AUCUNE de ces balises' , 
-	modalSelect2 : 'Avec TOUTES ces balises' , 
-	modalSelect3 : 'N\'a aucune de ces balises' , 
-	modalSelect4 : 'N\'a pas TOUTES ces balises' , 
+	modalSelect1 : 'Avec AUCUNE de ces tag' , 
+	modalSelect2 : 'Avec TOUTES ces tag' , 
+	modalSelect3 : 'Au moin un des ces tag' , 
 
 }

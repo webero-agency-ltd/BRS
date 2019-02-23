@@ -4,19 +4,23 @@ import reactDom from 'react-dom'
 import Modals from './components/Modale/'
 import { Container , Row , Col } from 'react-bootstrap';
 
+import Contacts from './components/Contacts/'
+import Menu from './components/Menu/'
 import lang from '../libs/lang' ;
 
 declare global {
 
-    namespace JSX {
+    namespace JSX { 
         interface IntrinsicElements {
-            //'Token': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'Contacts': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'Menu': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }
 
     interface Window { 
     	trans: object;
     	isToken: boolean;
+    	urlFindToken:string ; 
     }
 
 }
@@ -28,7 +32,7 @@ interface appProps {
 interface appState {
 
 } 
-
+ 
 class Application extends React.Component <appProps , appState>{
 
 	constructor( props ){
@@ -46,7 +50,11 @@ class Application extends React.Component <appProps , appState>{
 		const {} = this.state
 
 		return <Container>
-			sdsdfsdfsd
+
+			<Menu/>
+
+			<Contacts/>
+			
 		</Container>;
 
 	}

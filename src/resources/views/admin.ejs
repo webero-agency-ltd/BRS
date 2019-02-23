@@ -12,11 +12,11 @@
 
 		<script>
 			window.isToken=<%= !locals.erreur %>;
-			window.trans= <%- lang.replace(/=&gt;/g, '=>') %>  ; 
+			window.urlFindToken="<%= locals.urlFindToken %>".replace(/&amp;/g, '&');
+			window.trans= <%- lang.replace(/=&gt;/g, '=>') %>;
 		</script>
-
 		<div id="app"></div>
-		
+
 		<script src="/assets/js/admin.js"></script>
 
 	</body>

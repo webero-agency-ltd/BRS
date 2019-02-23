@@ -15,7 +15,6 @@ interface searchTagStade {
 
 export default class SearchTag extends React.Component<searchTagProps,searchTagStade>{
 
-
 	constructor(props){
 
 		super(props) ; 

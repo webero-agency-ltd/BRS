@@ -15,15 +15,13 @@ export default class Token extends React.Component{
  
 		this.stadeToken = window.isToken ;
 
-		//this.lastRefresh = NOW() ; 
-
 	}
 
 	render(){
 
 		return <Row>
 	    	<Col>
-	    		<Alert variant="primary">
+	    		<Alert {...(this.stadeToken ? {variant: 'primary'} : {variant: 'danger'})}>
 					<Row>
 						{ this.stadeToken ? <Col sm={8}>{lang('TokenSuccess')}</Col> : <Col sm={8}>{lang('TokenError')}</Col> }
 						<Col sm={4}>
@@ -35,10 +33,10 @@ export default class Token extends React.Component{
 	  	</Row> ;
 	}
 
-	refresh(){
+	refresh(){ 
 
-		alert('TOKEn refresh') ; 
-
+		window.location.assign( window.urlFindToken ) ; 
+		
 	}
 
 }
