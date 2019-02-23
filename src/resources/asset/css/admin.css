@@ -1,0 +1,11 @@
+
+/* Stylisation du boutton */
+
+.btn-left{
+	float: right;
+}
+
+
+.on-hover{
+	cursor: pointer;
+}
