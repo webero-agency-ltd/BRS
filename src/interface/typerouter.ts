@@ -6,4 +6,13 @@ export interface typeRouter{
 
 	verb: string , 
 
+	validator?: string , 
+
+}
+
+
+export interface responseRoute{
+
+	validate( data : string ) : void , 
+
 }

@@ -25,5 +25,8 @@ module.exports = {
 	modalSelect1 : 'Avec AUCUNE de ces tag' , 
 	modalSelect2 : 'Avec TOUTES ces tag' , 
 	modalSelect3 : 'Au moin un des ces tag' , 
+	
+	//section produit
+	ProduitTitle : 'Notre produit est ICI' , 
 
 }

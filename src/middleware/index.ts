@@ -2,10 +2,13 @@
 import { Express ,  Application }  from 'express' ; 
 import express from 'express' ; 
 
+import { DbInterface } from '../interface/DbInterface';
+
 var bodyParser = require('body-parser') ; 
 const path = require('path') ; 
 
-module.exports = async function ( app : Application ) :Promise<boolean>{
+
+module.exports = async function ( app : Application , db : DbInterface ) :Promise<boolean>{
 
 	/*
 	*	Déclaration de tout les middleware ( meme ce que l'on crée )

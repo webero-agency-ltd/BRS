@@ -7,6 +7,7 @@ declare namespace Express {
    	export interface Request {
       	ifstInitToken?: ()=> boolean
       	ifstFindToken?: ( data:string )=> Promise <boolean>
+      	validator?: ( data:string , code : number )=> void
       	infusionsoft?: sdkifst
    	}
 

@@ -3,8 +3,9 @@ import * as React from 'react'
 import { Modal , Button } from 'react-bootstrap';
 //Importation de tout les composante qui utilise le modale 
 import EditePage from '../admin/EditePage/';
+import EditeProduit from '../admin/EditeProduit/';
 
-let comps = { EditePage } ; 
+let comps = { EditePage , EditeProduit } ; 
 
 interface modaleProps {
 
@@ -43,7 +44,8 @@ export default class Modale extends React.Component <modaleProps , modaleStade>{
 	render(){
 
 		let { show , closeModal , type , title } = this.props ; 
-		const TagName = comps['EditePage'] ;
+
+		const TagName = comps[type] ;
 
     	return <Modal onHide={ closeModal } show={ show }>
 
@@ -52,7 +54,9 @@ export default class Modale extends React.Component <modaleProps , modaleStade>{
 		  	</Modal.Header>
 
 		  	<Modal.Body>
-		    	<TagName close={ closeModal } ref={ this.child } />
+		    	{
+		    		type && <TagName close={ closeModal } ref={ this.child } />
+		    	}
 		  	</Modal.Body>
 
 		  	<Modal.Footer>

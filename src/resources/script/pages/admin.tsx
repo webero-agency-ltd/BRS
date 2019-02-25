@@ -2,6 +2,7 @@ import * as React from 'react'
 import reactDom from 'react-dom'
 import Token from './components/admin/Token/'
 import SearchTag from './components/admin/SearchTag/'
+import Produit from './components/admin/Produit/'
 
 import Modals from './components/Modale/'
 import { Container , Row , Col } from 'react-bootstrap';
@@ -14,6 +15,7 @@ declare global {
         interface IntrinsicElements {
             'Token': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'EditePage': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'Produit': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }
 
@@ -71,6 +73,7 @@ class Application extends React.Component <appProps , appState>{
 
 	handleShowModal( modalComps : string , modalTitle : string ){
 
+		console.log( modalComps ) ; 
 		this.setState( { Modale: true , modalComps , modalTitle } ) ; 
 
 	}
@@ -87,6 +90,10 @@ class Application extends React.Component <appProps , appState>{
 			<SearchTag
 				editePage={ ( name )=> this.handleShowModal( 'EditePage' , lang( 'modalEditPageTitle' ,{ name }) ) }
 				></SearchTag>
+
+			<Produit
+				editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalEditPageTitle' ,{ name }) ) }
+				></Produit>
 
 			<Modals 
 				title={ modalTitle }

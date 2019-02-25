@@ -17,7 +17,8 @@ export default async function () : Promise<typeRouter[]> {
 
 	// admin ajoute de tag et 
 	await app.get('/admin/tags','admin/tags/find') ; 
-	await app.post('/admin/tags','admin/tags/create') ; 
+
+	await app.post('/admin/tags','admin/tags/create').validate('user') ; 
 
 	await app.get('/token','ifstToken') ; 
 
@@ -26,6 +27,9 @@ export default async function () : Promise<typeRouter[]> {
 	*/
 	await app.get('/affilier','infusionsoft/affilier') ; 
 
+
+	//Route des utilisateurs de l'application 
+	await app.get('/user','users/index') ; 
 
 	
 	// Retourne de tout les route indiqué a la base du serveur pour le crée ensuite sur express js

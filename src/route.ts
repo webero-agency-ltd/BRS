@@ -1,5 +1,5 @@
-import { typeRouter } from './interface/typerouter';
 
+import { typeRouter , responseRoute } from './interface/typerouter';
 
 class route {
 
@@ -10,24 +10,42 @@ class route {
 	} 
 
 	add( obj : typeRouter ){
-		this._verbe.push(obj)
-		return this._verbe ; 
+		return this._verbe.push(obj) ; 
 	}
 
-	get( url : string , ctrl : string ) : typeRouter[] {
-		return this.add({url,ctrl,'verb':'get'}) ; 
+	get( url : string , ctrl : string ) {
+		let i = this.add({url,ctrl,'verb':'get'}) ; 
+		return this.response( i ) ;   
 	}
 
-	post( url : string , ctrl : string ) : typeRouter[] {
-		return this.add({url,ctrl,'verb':'post'}) ;  
+	post( url : string , ctrl : string ) {
+		let i = this.add({url,ctrl,'verb':'post'}) ; 
+		return this.response( i ) ;  
 	}
 
-	put( url : string , ctrl : string ) : typeRouter[] {
-		return this.add({url,ctrl,'verb':'put'}) ;  
+	put( url : string , ctrl : string ) {
+		let i = this.add({url,ctrl,'verb':'put'}) ; 
+		return this.response( i ) ;  
 	}
 
-	delete( url : string , ctrl : string ) : typeRouter[] {
-		return this.add({url,ctrl,'verb':'delete'}) ;  
+	delete( url : string , ctrl : string ) {
+		let i = this.add({url,ctrl,'verb':'delete'}) ; 
+		return this.response( i ) ;    
+	}
+
+	/*
+	*	Donner de response 
+	*/
+	response( item : number ) : responseRoute {
+
+		return  { 
+			validate : ( data : string )=>{
+				this._verbe[item-1]['validator'] = data ; 
+			}
+			//autre fonction a ajouter dans le future et que l'on peut utilisé pour le traitemment 
+			//ex : utilise ce middewaire en particulier 
+		} as responseRoute ;
+
 	}
 
 	get verbe() : typeRouter[] {
