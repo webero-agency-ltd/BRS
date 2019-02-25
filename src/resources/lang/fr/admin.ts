@@ -27,6 +27,16 @@ module.exports = {
 	modalSelect3 : 'Au moin un des ces tag' , 
 	
 	//section produit
-	ProduitTitle : 'Notre produit est ICI' , 
+	ProduitTitle : 'Liste des produit' ,
+
+	modalProduitNew : 'New' , 
+	modalProduitEdit : 'Edit' ,
+	modalProduitDelete : 'Delete' ,
+
+	modalProduitTitle : 'Création nouveaux produit', 
+	modalProduitName : 'Nom produit', 
+	modalProduitPrixLv1 : 'prix affilier niveaux 1', 
+	modalProduitPrixLv2 : 'prix affilier niveaux 1', 
+	modalProduitTag : 'Nom produit dans tag', 
 
 }

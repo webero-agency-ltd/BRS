@@ -92,7 +92,7 @@ class Application extends React.Component <appProps , appState>{
 				></SearchTag>
 
 			<Produit
-				editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalEditPageTitle' ,{ name }) ) }
+				editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalProduitTitle' ,{ name }) ) }
 				></Produit>
 
 			<Modals 

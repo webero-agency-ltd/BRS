@@ -62,13 +62,13 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 				  	</thead>
 				  	<tbody>
 					  	{contacts.map((e)=>{
-						    return <tr>
+						    return <tr key={e.id} >
 						      	<td>...</td>
-						      	<td>...</td>
-						      	<td>...</td>
+						      	<td>{e.type}</td>
+						      	<td>{e.produit}</td>
 						      	<td>{e.last_name}</td>
 						      	<td>{e.first_name}</td>
-						      	<td>...</td>
+						      	<td>{e.prix} £</td>
 						      	<td>...</td>
 						    </tr>
 					  	})}

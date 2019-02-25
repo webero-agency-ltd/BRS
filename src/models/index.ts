@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import { DbInterface } from '../interface/DbInterface';
 import { UserFactory } from './User';
+import { ProduitFactory } from './produit';
 
 export const createModels = (sequelizeConfig: any): DbInterface => {
 
@@ -11,7 +12,8 @@ export const createModels = (sequelizeConfig: any): DbInterface => {
     const db: DbInterface = {
         sequelize,
         Sequelize,
-        User: UserFactory(sequelize, Sequelize)
+        User: UserFactory(sequelize, Sequelize),
+        Produit: ProduitFactory(sequelize, Sequelize)
     };
 
     Object.keys(db).forEach(modelName => {

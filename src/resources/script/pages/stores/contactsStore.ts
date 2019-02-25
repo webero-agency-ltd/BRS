@@ -55,6 +55,9 @@ export default class contactsStore  {
 
 			if ( response.ok ) { 
 				data = await response.json() ; 
+
+				console.log( data ) ; 
+
 				let usersData = Object.keys( data['users'] ) ; 
 				for( let u of usersData ){
 					this.contacts = [{
@@ -62,6 +65,7 @@ export default class contactsStore  {
 						id : data['users'][u]['user']['id'] as number ,
 						last_name : data['users'][u]['user']['last_name'] as string,
 						email : data['users'][u]['user']['email'] as string,
+						...data['users'][u]['info']
 					}, ...this.contacts]
 				}
 				

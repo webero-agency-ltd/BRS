@@ -9,7 +9,74 @@ import { filter } from '../../lib/filter'
 
 const Mustache = require( 'Mustache' ) ; 
 
+import { DbInterface } from '../../interface/DbInterface';
+
+import { ProduitAttributes } from '../../models/produit';
+
+//récupération de tout les produit pour faire une comparaision
+let allproduct = function ( Produit ) : Promise<ProduitAttributes[]>{
+
+ 	return new Promise<ProduitAttributes[]>( (resolve) => { 
+ 		//Récupération des informations de produit 
+		Produit.findAll()
+
+		.then(produits => {
+		  	return resolve( produits ) ; 
+		})
+ 		
+ 		.catch( e => resolve( [] ) )
+
+	});	
+
+}
+
+let findTagInfo = function ( tags : infusionTag[] , id : number ) {
+
+	let tag = null ;
+
+	for( let i of tags ){
+		if ( i.id == id ) {
+			tag = i ;
+			break
+		}
+	}
+
+	return tag ;
+
+}
+
+//cette fonction ajoute les informations suplémentaire d'un utilisateur 
+// ex : le tag d'un produit a la quel il appartienne ect 
+let userComp = function ( users : any , tags : infusionTag[] , produits : ProduitAttributes[] ) {
+
+	let keys = Object.keys( users ) ; 
+	let newuser = {}
+	for(let d of keys ){
+		newuser[d] = { ...users[d] };
+		users[d]['tags'].forEach(e=>{
+			let info = findTagInfo( tags , e['id'] as number ) ; 
+			for(let p of produits ){
+				let { name , prixLv1 , prixLv2 , tag } = p ; 
+				if ( info['name'].search( tag ) !== -1 ) {
+					let prix = prixLv1
+					let type = 'Level 1';
+					if ( info['name'].search( 'Lv2' )  !== -1 ) {
+						prix = prixLv2 ; 
+					 	type = 'Level 2';
+					} 
+					newuser[d]['info'] = { produit : name , type , prix } ;
+				}
+			}
+		})
+	}
+	return newuser ;
+
+
+}
+
 module.exports = async function ( req:Request, res:Response ) {
+
+	let { Produit } = this.db as DbInterface ;
 
 	//initialisation ou récupération des donner infusion soft 
 	if ( ! req.ifstInitToken() ) 
@@ -64,7 +131,11 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	//Ici on a les différent résultat, on fait le trie en fonction des condition maitenant 
 	let finale = await filter( affiliers , data.option , tags ) ; 
- 
-	return res.response( finale ,200) ;
 
+	let allproduit = await allproduct( Produit ) ; 
+
+	let users = userComp( finale['users'] , tags , allproduit ) ;  
+
+	return res.response( { users , tags : finale['tags'] } ,200) ;
+ 
 };
