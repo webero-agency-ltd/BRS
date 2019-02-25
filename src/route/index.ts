@@ -18,7 +18,7 @@ export default async function () : Promise<typeRouter[]> {
 	// admin ajoute de tag et 
 	await app.get('/admin/tags','admin/tags/find') ; 
 
-	await app.post('/admin/tags','admin/tags/create').validate('user') ; 
+	await app.post('/admin/tags','admin/tags/create'); //.validate('user') 
 
 	await app.get('/token','ifstToken') ; 
 
