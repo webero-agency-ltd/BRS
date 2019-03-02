@@ -3,8 +3,6 @@ import { Request , Response }  from 'express' ;
 
 import express from 'express' ; 
 
-import routeliste from './route/index'  ;
-
 const path = require('path') ; 
 
 const app = express() ; 
@@ -25,9 +23,7 @@ const db = createModels(sequelizeConfig);
 
 //création des tables et instanciation de la base de données
 
-db.sequelize.sync({ force: false });
-
-const validator = require("./request/");  
+db.sequelize.sync({ force: false }); 
 
 export default class Serveur{
  
@@ -41,10 +37,7 @@ export default class Serveur{
 
 		//initialisation des middleware de l'applications 
 		await this.middleware();
-		
-		//initialisation des routes de l'application 
-		let route = await routeliste();
-		this.route( route ) ; 
+		this.route() ; 
 
 	}
 
@@ -56,20 +49,10 @@ export default class Serveur{
 
 	}
 
-	route( routes ){
+	async route(){
 
-		for( let r of routes ){
-			//applle des méthode route et faire des boucle 
-			if ( typeof app[r.verb] === 'function' ) {
-				let cbl = require('./controller/'+r.ctrl) ;
-				r.validator?
-					//on a une validation ICI
-					app[r.verb](r.url,validator.bind({rull:r.validator}),cbl.bind({db})):
-					//on a pas une validation ici
-					app[r.verb](r.url,cbl.bind({db}))
-				
-			} 
-		}
+		let cbl = require('./route/index') ; 
+		let route = await cbl(app,db) ; 
 
 		app.listen( this.port , () => {
 			console.log('le seruver est démarré sur le port',this.port)

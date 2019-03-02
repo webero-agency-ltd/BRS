@@ -3,6 +3,8 @@ import { Request , Response }  from 'express' ;
 
 import { DbInterface } from '../interface/DbInterface';
 
+const passport = require('passport')
+
 module.exports = function ( req:Request, res:Response ) {
 
 	let { User } = this.db as DbInterface ; 

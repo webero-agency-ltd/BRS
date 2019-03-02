@@ -8,3 +8,4 @@ module.exports = function  ( req:Request, res:Response ) {
 	res.send('Bienvenu dans la page d\'inscrire' ) ; 
 
 };
+ 

@@ -4,9 +4,17 @@ import express from 'express' ;
 
 import { DbInterface } from '../interface/DbInterface';
 
-var bodyParser = require('body-parser') ; 
-const path = require('path') ; 
+const bodyParser = require('body-parser') ; 
 
+const path = require('path') ; 
+ 
+const passport = require('passport') ; 
+
+const cookieParser = require('cookie-parser');
+
+const LocalStrategy = require('passport-local').Strategy;
+
+const session = require('express-session');
 
 module.exports = async function ( app : Application , db : DbInterface ) :Promise<boolean>{
 
@@ -23,6 +31,23 @@ module.exports = async function ( app : Application , db : DbInterface ) :Promis
 	 
 	// parse application/json
 	app.use(bodyParser.json())
+
+	//app.use(cookieParser());
+
+	app.use(session({
+	  	secret: 'secret',
+	  	saveUninitialized: true,
+	  	resave: true
+	}));
+
+	passport.use(new LocalStrategy( function(username, password, done) {
+
+    	return done(null, {username:'heldino'});
+  	}));
+
+	app.use(passport.initialize());
+	
+	app.use(passport.session());
 	
 	//création de fonction de response en express JS ( Retourne en fonction JSON ) 
 	app.use(require('./response')) ;
