@@ -9,3 +9,25 @@
 .on-hover{
 	cursor: pointer;
 }
+
+.tspace-6{
+	margin-top: 6rem;
+}
+
+.bspace-6{
+	margin-bottom: 6rem; 
+}
+
+.tspace-1{
+	margin-top: 1rem;
+}
+
+.bspace-1{
+	margin-bottom: 1rem; 
+}
+
+.center-b{
+	margin-left: auto;
+	margin-right: auto;
+}
+ 

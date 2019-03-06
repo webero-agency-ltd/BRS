@@ -104,7 +104,7 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 				  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="info">{lang('modalDelTag')} </Badge>
 				  		</ListGroup.Item>
 				  	})}
-				</ListGroup>;
+				</ListGroup>
 			</div>
 			<div>
 
@@ -125,7 +125,7 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 				   	<Button onClick={ this.addTag } variant="outline-secondary">{lang('modalTagAdd')}</Button>
 				</Form>
 			</div>
-		</div>;
+		</div>
 
 	}
 	

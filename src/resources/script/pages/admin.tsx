@@ -85,15 +85,21 @@ class Application extends React.Component <appProps , appState>{
 
 		return <Container>
 
-			<Token/>
+			<div className="tspace-1" >
+				<Token/>
+			</div>
 
-			<SearchTag
-				editePage={ ( name )=> this.handleShowModal( 'EditePage' , lang( 'modalEditPageTitle' ,{ name }) ) }
-				></SearchTag>
+			<div className="tspace-1" >
+				<SearchTag
+					editePage={ ( name )=> this.handleShowModal( 'EditePage' , lang( 'modalEditPageTitle' ,{ name }) ) }
+					></SearchTag>
+			</div>
 
-			<Produit
-				editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalProduitTitle' ,{ name }) ) }
-				></Produit>
+			<div className="tspace-1" >
+				<Produit
+					editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalProduitTitle' ,{ name }) ) }
+					></Produit>
+			</div>
 
 			<Modals 
 				title={ modalTitle }

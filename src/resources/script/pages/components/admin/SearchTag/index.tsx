@@ -30,9 +30,9 @@ export default class SearchTag extends React.Component<searchTagProps,searchTagS
 			    		<ListGroup>
 						  	<ListGroup.Item variant="dark" >{lang('SearchTagTitle')}</ListGroup.Item>
 						  	<ListGroup.Item>{lang('SearchTagPage')} <Badge className="on-hover btn-left" onClick={ ()=> editePage('Page 1') } pill variant="info">{lang('SearchTagPageEdit')} </Badge></ListGroup.Item>
-						</ListGroup>;	
+						</ListGroup>
 			    	</Col>
-		  		</Row> ;
+		  		</Row>
 	}
 
 

@@ -76,9 +76,9 @@ export default class SearchTag extends React.Component<searchTagProps,searchTagS
 						  			<Badge className="on-hover btn-left" onClick={ ()=>this.edit( e ) } pill variant="info">{lang('modalProduitEdit')} </Badge>
 						  		</ListGroup.Item>
 						  	})}
-						</ListGroup>;	
+						</ListGroup>	
 			    	</Col>
-		  		</Row> ;
+		  		</Row> 
 	}
 
 

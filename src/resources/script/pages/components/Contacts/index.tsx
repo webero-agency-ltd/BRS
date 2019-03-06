@@ -44,8 +44,6 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 
 		let { contacts } = this.state ; 
 
-		console.log('red..............' , contacts )
-
 		return <Row>
 			<Col>
 				<Table striped bordered hover>
@@ -73,9 +71,9 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 						    </tr>
 					  	})}
 				  	</tbody>
-				</Table>;
+				</Table>
 			</Col>
-		</Row>;
+		</Row>
 	}
 
 

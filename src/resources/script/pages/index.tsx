@@ -55,7 +55,7 @@ class Application extends React.Component <appProps , appState>{
 
 			<Contacts/>
 			
-		</Container>;
+		</Container>
 
 	}
 
