@@ -5,19 +5,9 @@ import { User } from '../../interface/User';
 
 import { DbInterface } from '../../interface/DbInterface';
 
-import * as bcrypt from 'bcrypt' ;
+import hash from '../../lib/hash' ;
 
 const passport = require('passport') ; 
-
-function hash( pass ) : Promise <string> {
-	
-	return new Promise<string>( async (resolve) => { 
-		bcrypt.hash( pass , 10 , (err, hash) => { 
-			resolve( hash )
-		})
-	});
-
-}
 
 function Unique( User , contactId ) : Promise <boolean> {
 

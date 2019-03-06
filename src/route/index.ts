@@ -46,13 +46,7 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	//a partir d'ici, on ajoute tout les routes de l'applications 
 
 	//route home de l'application, si l'utilisateur n'est pas connecté, alors on le redirige vers la page login 
-	app.get('/',(req, res, next) => {
-	    if (req.user) {
-	        next();
-	    } else {
-	        res.redirect('/login');
-	    }
-	},require('../controller/index').bind({db})) ;
+	app.get('/',require('../controller/index').bind({db})) ;
 
 	/****************************************************************
 	*	Route des authentiffication utilisateur 
@@ -79,6 +73,8 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	app.post('/sinup',validator.bind({rull:'sinup'}),require('../controller/sinup/sinup').bind({db})) ; 
 	
 	app.get('/logout', function(req, res){
+		//destruction de cookie rememberToken  
+		res.clearCookie("rememberToken");
 	  	req.logout();
 	  	res.redirect('/');
 	});
@@ -102,18 +98,15 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	
 	/****************************************************************/
 
-
 	app.get('/token',require('../controller/ifstToken').bind({db})) ; 
 
 	/*
 	*	Récupération Affilier des utilisateur
 	*/
-	app.get('/affilier',require('../controller/infusionsoft/affilier').bind({db})) ; 
-
+	app.get('/affilier',require('../controller/infusionsoft/affilier').bind({db})) ;  
 
 	//Route des utilisateurs de l'application 
 	app.get('/user',require('../controller/users/index').bind({db})) ; 
-
 	
 	// Retourne de tout les route indiqué a la base du serveur pour le crée ensuite sur express js
 	return new Promise<boolean>( resolve => resolve( true ));

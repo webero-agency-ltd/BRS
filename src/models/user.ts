@@ -9,6 +9,7 @@ export interface UserAttributes {
   	given_name?: string;
   	email: string;
     password: any;
+    role?: any;
   	rememberToken?: string;
   	createdAt?: Date;
   	updatedAt?: Date;
@@ -38,6 +39,9 @@ export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
           type: DataTypes.STRING
       },
       rememberToken: {
+          type: DataTypes.STRING
+      },
+      role :{
           type: DataTypes.STRING
       }
   	};

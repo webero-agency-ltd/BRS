@@ -9,6 +9,10 @@ const app = express() ;
 
 import { createModels } from './models';
 
+import { DbInterface } from './interface/DbInterface';
+
+import hash from './lib/hash' ;
+
 app.set('views', path.join(__dirname, 'resources/views'));
 
 app.set('view enginer','ejs') 
@@ -22,8 +26,35 @@ const sequelizeConfig = require('./config/sequelize');
 const db = createModels(sequelizeConfig);
 
 //création des tables et instanciation de la base de données
+db.sequelize.sync({ force: false })
+	//création d'utilisateur admin lors de l'instanciation de l'application 
+	.then(()=>{
 
-db.sequelize.sync({ force: false }); 
+		let { User } = db as DbInterface ; 
+		//recherche d'abord si l'utilisateur admin n'existe pas 
+		db.User.findOne({
+		    where: {
+		        role: 'admin'
+		    }
+	    }).then( async function(dbUser) {
+	      	// si l'utilisateur admin n'existe pas alors on le crée 
+	      	if (!dbUser) {
+		        let family_name = 'admin' ; 
+				let given_name = 'admin' ; 
+				let email = 'admin@gmail.com' ; 
+				let role = 'admin' ; 
+				let password = await hash('admin@gmail.com') ; 
+
+				User.create({family_name,given_name,email,password,role})
+					.then(user => {
+						console.log('ADMIN OK')
+					})
+					.catch( e => console.log('ADMIN PAS OK') )
+		    }
+
+	    });
+		
+	}); 
 
 export default class Serveur{
  

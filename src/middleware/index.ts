@@ -110,6 +110,8 @@ module.exports = async function ( app : Application , db : DbInterface ) :Promis
 
 	app.use(require('./infusionsoft')) ; 
 	
+	app.use(require('./isUser')) ; 
+	
 	/***************************************************************/
 
 	return new Promise<boolean>( resolve => resolve( true ));
