@@ -7,7 +7,7 @@ import { tagPageOption , infusionTag } from '../../interface/tagPageOption';
 
 import { filter } from '../../lib/filter'
 
-const Mustache = require( 'Mustache' ) ; 
+const Mustache = require( 'mustache' ) ; 
 
 import { DbInterface } from '../../interface/DbInterface';
 
@@ -85,7 +85,7 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	let id = req.query.id ; 
 
-	let username = 'Janick_Marion' ; 
+	let username = req.user.family_name + '' + req.user.given_name ; 
 
 	let data = await find() as tagPageOption ;
 

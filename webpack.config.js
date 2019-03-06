@@ -11,6 +11,7 @@ let resources = (folder , rac='dist') =>  path.join(__dirname , rac+'/resources/
 module.exports = {
 
 	entry: {
+	    sinup : resolve('./script/pages/sinup'),
 	    login : resolve('./script/pages/login'),
 	    contacts : resolve('./script/pages/contacts'),
 	    admin : resolve('./script/pages/admin'),

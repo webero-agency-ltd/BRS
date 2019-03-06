@@ -1,6 +1,7 @@
 
 import { configSite } from '../interface/configSite';
 import { infusionTag } from './tagPageOption';
+import { User } from './User';
 
 export interface sdkifst{
 
@@ -15,6 +16,7 @@ export interface sdkifst{
 	getUrlAuht?: ()=> string  ,
 	initToken?: (code : string)=> Promise <boolean>  ,
 	tags?: ()=> Promise <string[]>  ,
+	user?: ( data : number )=> Promise <User>  ,
 	affilier?: ( data : infusionTag[] ) => Promise <string[]>  ,
 
 }

@@ -18,6 +18,8 @@
 				</div>
 			</section>
 
+			<div id="alert-erreur" class="alert alert--danger" role="alert" style="display: none ; "></div>
+
 			<section class="autogrid section-form">
 			    <div class="form-content center-b">
 					<form action="#">
@@ -44,6 +46,10 @@
 					<div style="font-size:16px" class="ld ld-ring ld-cycle"></div>
 				</button>
 			</div>
+			
+			<% if( locals.rememberToken ) { %>
+				<input id="input-remember-value" type="hidden" value="<%= locals.rememberToken %>" >
+			<% } %>
 
 			<div class="txtcenter tspace-6">
 			    <span><a class="under-hov col-hov" href="#"><%= locals.lang.remember %></a></span> | <span><a class="under-hov col-hov" href="#"><%= locals.lang.sign_up %></a></span>

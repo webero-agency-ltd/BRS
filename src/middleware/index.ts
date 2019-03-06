@@ -1,5 +1,8 @@
 
 import { Express ,  Application }  from 'express' ; 
+
+import * as bcrypt from 'bcrypt' ;
+
 import express from 'express' ; 
 
 import { DbInterface } from '../interface/DbInterface';
@@ -32,7 +35,7 @@ module.exports = async function ( app : Application , db : DbInterface ) :Promis
 	// parse application/json
 	app.use(bodyParser.json())
 
-	//app.use(cookieParser());
+	app.use(cookieParser());
 
 	app.use(session({
 	  	secret: 'secret',
@@ -40,10 +43,60 @@ module.exports = async function ( app : Application , db : DbInterface ) :Promis
 	  	resave: true
 	}));
 
-	passport.use(new LocalStrategy( function(username, password, done) {
+	passport.use(new LocalStrategy(
+  		{
+		    usernameField: "email"
+		},
+		function(email, password, done) {
+		    
+		   	db.User.findOne({
+			    where: {
+			        email: email
+			    }
+		    }).then(function(dbUser) {
+		      
+		      	if (!dbUser) {
+			        return done(null, false);
+			    }
+			    else if ( ! bcrypt.compareSync(password, dbUser.password) ) {
+		    		return done(null, false);
+			    }
+		      	return done(null, dbUser);
 
-    	return done(null, {username:'heldino'});
-  	}));
+		    });
+		}
+
+	));
+
+	passport.use('token-local',new LocalStrategy(
+  		{
+		    usernameField: "rememberToken" 
+		},
+		function(rememberToken, password, done) {
+
+		    db.User.findOne({
+			    where: {
+			        rememberToken : rememberToken  
+			    }
+		    }).then(function(dbUser) {
+
+		    	if (!dbUser) {
+			        return done(null, false);
+			    }
+		      	return done(null, dbUser);
+
+		    });
+		}
+	));
+
+
+	passport.serializeUser(function(user, cb) {
+	  	cb(null, user);
+	});
+	
+	passport.deserializeUser(function(obj, cb) {
+	  	cb(null, obj);
+	});
 
 	app.use(passport.initialize());
 	

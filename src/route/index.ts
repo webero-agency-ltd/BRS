@@ -9,42 +9,110 @@ const passport = require('passport');
 
 const validator = require("../request/"); 
 
+/*
+*	S'il ny a pas d'utilisateur connecté, on retourne une erreur  
+*/
+function loggedIn(req, res, next) {
+
+    if (req.user) {
+        next();
+    } else {
+        res.json({authorized:false},401);
+    }
+
+}
+
+/*
+*	Si l'utilisateur est connecté, on le redirige vers la page home 
+*/
+function guard(req, res, next) {
+
+	if (req.user) {
+        res.redirect('/');
+    } else {
+        next();
+    }
+ 
+}
+
+//NOTE : si on veut utiliser une validation de donnée dans une route en particulier
+//on utilise validator.bind({rull:'xxx'}) comme deuxième ou troisième paramètre
+//de la fonction app.verbe (ex app.get('/login',validator.bind({rull:'xxx'}),require('../controller/www').bind({db}))  )
+//ici dans ce cas, xxx doivent correspondre a un nom de fichier dans /src/request/xxx.ts
+//et qui contiens les règles de validation 
+
 module.exports = async function ( app : Application , db : DbInterface ) : Promise<boolean> {
 
+	//a partir d'ici, on ajoute tout les routes de l'applications 
 
-	let login = passport.authenticate('local', { failureRedirect: '/login' })  ; 
-	//ICI on ajoute tout les routes de l'applications 
+	//route home de l'application, si l'utilisateur n'est pas connecté, alors on le redirige vers la page login 
+	app.get('/',(req, res, next) => {
+	    if (req.user) {
+	        next();
+	    } else {
+	        res.redirect('/login');
+	    }
+	},require('../controller/index').bind({db})) ;
 
-	await app.get('/',login,require('../controller/index').bind({db})) ;
+	/****************************************************************
+	*	Route des authentiffication utilisateur 
+	****************************************************************/
+ 
+	app.get('/login',guard,require('../controller/login/').bind({db})) ; 
 
-	await app.get('/login',require('../controller/login').bind({db})) ; 
+	app.post('/login',function (req, res, next) {
 	
-	await app.get('/sinup',require('../controller/sinup').bind({db})) ; 
+		//si un utilisateur a un remember token lors de la connexion 
+		if ( req.cookies.rememberToken ) {
+			req.body['rememberToken'] = req.cookies.rememberToken; 
+			passport.authenticate('token-local')(req, res, next);
+		}else if (req.method == "POST"){
+			passport.authenticate('local')(req, res, next);
+		}else{
+			next() ; 
+		}
 
-	//route administrateur 
-	await app.get('/admin',login,require('../controller/admin/index').bind({db})) ; 
+	},require('../controller/login/login').bind({db}) );
 
+	app.get('/sinup',guard,require('../controller/sinup/').bind({db})) ; 
+
+	app.post('/sinup',validator.bind({rull:'sinup'}),require('../controller/sinup/sinup').bind({db})) ; 
+	
+	app.get('/logout', function(req, res){
+	  	req.logout();
+	  	res.redirect('/');
+	});
+
+	/****************************************************************/
+
+	/****************************************************************
+	*	Route des l'administrateur de l'application 
+	****************************************************************/
+	app.get('/admin',require('../controller/admin/index').bind({db})) ; 
+	
 	// admin ajoute de tag et 
-	await app.get('/admin/tags',login,validator.bind({rull:''}),require('../controller/admin/tags/find').bind({db})) ; 
-	await app.post('/admin/tags',login,validator.bind({rull:'user'}),require('../controller/admin/tags/create').bind({db})); 
-
+	app.get('/admin/tags',validator.bind({rull:''}),require('../controller/admin/tags/find').bind({db})) ; 
+	app.post('/admin/tags',require('../controller/admin/tags/create').bind({db})); 
+	
 	//les différent route du produit
-	await app.get('/admin/produit',login,require('../controller/admin/produit/index').bind({db})) ; 
-	await app.post('/admin/produit',login,validator.bind({rull:'produitCreate'}),require('../controller/admin/produit/create').bind({db})) ;
-	await app.put('/admin/produit',login,validator.bind({rull:'produitUpdate'}),require('../controller/admin/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
-	await app.delete('/admin/produit',login,require('../controller/admin/produit/delete').bind({db}));
+	app.get('/admin/produit',require('../controller/admin/produit/index').bind({db})) ; 
+	app.post('/admin/produit',validator.bind({rull:'produitCreate'}),require('../controller/admin/produit/create').bind({db})) ;
+	app.put('/admin/produit',validator.bind({rull:'produitUpdate'}),require('../controller/admin/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
+	app.delete('/admin/produit',require('../controller/admin/produit/delete').bind({db}));
+	
+	/****************************************************************/
 
 
-	await app.get('/token',login,require('../controller/ifstToken').bind({db})) ; 
+	app.get('/token',require('../controller/ifstToken').bind({db})) ; 
 
 	/*
 	*	Récupération Affilier des utilisateur
 	*/
-	await app.get('/affilier',login,require('../controller/infusionsoft/affilier').bind({db})) ; 
+	app.get('/affilier',require('../controller/infusionsoft/affilier').bind({db})) ; 
 
 
 	//Route des utilisateurs de l'application 
-	await app.get('/user',login,require('../controller/users/index').bind({db})) ; 
+	app.get('/user',require('../controller/users/index').bind({db})) ; 
 
 	
 	// Retourne de tout les route indiqué a la base du serveur pour le crée ensuite sur express js

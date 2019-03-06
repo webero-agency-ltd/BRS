@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path') ; 
 
 import { configSite } from '../interface/configSite';
+import { User } from '../interface/User';
 import { tagPageOption , infusionTag } from '../interface/tagPageOption';
 
 class infusionsoftSDK {
@@ -30,10 +31,12 @@ class infusionsoftSDK {
 
 	    this.urlAPI = 'https://api.infusionsoft.com/crm/rest/v1' ; 
 
+	    this.getToken() ; 
+
 	}
 
 	//Récupération des token d'access 
-	getToken() : object {
+	getToken() : object { 
 
 		if (fs.existsSync(this.tokenfile)) {
 			let token = fs.readFileSync(this.tokenfile).toString() ;
@@ -203,6 +206,37 @@ class infusionsoftSDK {
 			}
 
 			resolve( {users:{...users},tags:{...tags}} ) ; 
+
+		});
+
+	}
+
+	async user( data : number ) : Promise <User> {
+
+		return new Promise<User>( async (resolve) => { 
+
+			let url = this.urlAPI + '/contacts/'+data+'?access_token='+this.token['access_token'] ; 
+
+			request({
+			    headers: {
+			      'Content-Type': 'application/json'
+			    },
+			    uri:url,
+			    method: 'GET'
+			}, function (error, res, body) {
+				
+				if (!error && res.statusCode == 200) {
+					let jsondata : {}; 
+					try{
+						jsondata = JSON.parse( body ) ; 
+					}catch( e ){
+						jsondata = [] ; 
+					}
+					return resolve( jsondata ) ; 
+		        }
+				return resolve( {} ) ; 
+
+			});
 
 		});
 

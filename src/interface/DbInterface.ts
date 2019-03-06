@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { UserAttributes, UserInstance } from '../models/User';
+import { UserAttributes, UserInstance } from '../models/user';
 import { ProduitAttributes, ProduitInstance } from '../models/produit';
 
 export interface DbInterface {

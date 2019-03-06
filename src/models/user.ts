@@ -4,9 +4,12 @@ import { SequelizeAttributes } from '../interface/SequelizeAttributes';
 export interface UserAttributes {
 
   	id?: number;
-  	username: string;
+    contactId?: number;
+    family_name?: string;
+  	given_name?: string;
   	email: string;
-  	password: string;
+    password: any;
+  	rememberToken?: string;
   	createdAt?: Date;
   	updatedAt?: Date;
 
@@ -14,20 +17,29 @@ export interface UserAttributes {
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {
 	  
-};
+}; 
 
 export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<UserInstance, UserAttributes> => {
   	
   	const attributes: SequelizeAttributes<UserAttributes> = {
-    	username: {
-      		type: DataTypes.STRING
-    	},
+    	given_name: {
+          type: DataTypes.STRING
+      },
+      family_name: {
+          type: DataTypes.STRING
+      },
     	email: {
       		type: DataTypes.STRING
     	},
-    	password: {
-      		type: DataTypes.STRING
-    	}
+      contactId: {
+          type: DataTypes.INTEGER
+      },
+      password: {
+          type: DataTypes.STRING
+      },
+      rememberToken: {
+          type: DataTypes.STRING
+      }
   	};
 
   	const User = sequelize.define<UserInstance, UserAttributes>('User', attributes);

@@ -213,3 +213,12 @@ a.col-hov:hover{
     	transform: rotate(360deg);
 	}
 }
+
+.is-disabled, .js-disabled, [disabled], .is-disabled ~ label, [disabled] ~ label {
+    opacity: 0.8;
+    cursor: default !important;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+
+    border: none;
+}
