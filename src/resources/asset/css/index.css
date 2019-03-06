@@ -19,6 +19,14 @@
 	margin-bottom: 1rem; 
 }
 
+.tspace-2{
+	margin-top: 2rem;
+}
+
+.bspace-2{
+	margin-bottom: 2rem; 
+}
+
 .center-b{
 	margin-left: auto;
 	margin-right: auto;
@@ -221,4 +229,14 @@ a.col-hov:hover{
     filter: grayscale(1);
 
     border: none;
+}
+
+/*
+*	Stylisation du menu 
+*/
+.nav-item a{
+	padding: 0.8rem 2rem ;
+	background-color: #007bff ;
+	color : #FFF; 	
+	margin-right: 0.3rem;
 }
