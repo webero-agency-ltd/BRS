@@ -21,9 +21,13 @@ module.exports = async function ( req:Request, res:Response ) {
 	} 
 
 	//Récupération des informations de l'ID infusionsoft
-	let uI = await req.infusionsoft.user( contactId ) as User ;
+	let uI = await req.infusionsoft.user( contactId ) as User 
 
-	res.render('sinup.ejs',{user : uI }) 
+	if ( !uI['family_name'] ) {
+		res.locals.erreur = lang['non_contact_id_error'] as string ;
+	}
+
+	res.render('sinup.ejs',{user:uI}) 
 
 };
   
