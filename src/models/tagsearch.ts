@@ -13,7 +13,7 @@ export interface TagsearchInstance extends Sequelize.Instance<TagsearchAttribute
     
 }; 
 
-export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<TagsearchInstance, UserAttributes> => {
+export const TagsearchFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<TagsearchInstance, TagsearchAttributes> => {
     
     const attributes: SequelizeAttributes<TagsearchAttributes> = {
       value: {
