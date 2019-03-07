@@ -9,7 +9,9 @@ module.exports = {
 	//section gestion recherche tags 
 	SearchTagTitle : 'Tag a rechercher par pages' , 
 
-	SearchTagPage : 'Tableaux {{}}' , 
+	SearchTagPage : 'Tableaux ' ,
+
+	SearchTagRecherche : 'Recherche ' , 
 
 	SearchTagPageEdit : 'Edit' , 
 
@@ -18,6 +20,10 @@ module.exports = {
 
 	modalTagInput : 'Entré ICI votre tag' , 
 	modalTagAdd : 'Ajout de tag' , 
+
+	//tage de la page recherche 
+	modaltextTag : 'Entré ICI votre tag' , 
+	modalvalueTag : 'nom de votre tag ICI' , 
 	
 	modalEditTag : 'Edit' , 
 	modalDelTag : 'Delete' ,

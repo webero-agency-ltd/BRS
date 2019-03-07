@@ -6,6 +6,7 @@ import lang from '../../../../libs/lang' ;
 interface searchTagProps {
 
 	editePage : ( data : string ) => void
+	editePageRecherche : ( data : string ) => void
 
 } 
 
@@ -23,12 +24,13 @@ export default class SearchTag extends React.Component<searchTagProps,searchTagS
 
 	render(){
 
-		let { editePage } = this.props ; 
+		let { editePage , editePageRecherche } = this.props ; 
 
 		return <Row>
 					<Col>
 			    		<ListGroup>
 						  	<ListGroup.Item variant="dark" >{lang('SearchTagTitle')}</ListGroup.Item>
+						  	<ListGroup.Item>{lang('SearchTagRecherche')} <Badge className="on-hover btn-left" onClick={ ()=> editePageRecherche('Page Recherche') } pill variant="info">{lang('SearchTagPageEdit')} </Badge></ListGroup.Item>
 						  	<ListGroup.Item>{lang('SearchTagPage')} <Badge className="on-hover btn-left" onClick={ ()=> editePage('Page 1') } pill variant="info">{lang('SearchTagPageEdit')} </Badge></ListGroup.Item>
 						</ListGroup>
 			    	</Col>

@@ -15,6 +15,7 @@ declare global {
         interface IntrinsicElements {
             'Token': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'EditePage': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'EditePageRecherche': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'Produit': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }
@@ -73,7 +74,6 @@ class Application extends React.Component <appProps , appState>{
 
 	handleShowModal( modalComps : string , modalTitle : string ){
 
-		console.log( modalComps ) ; 
 		this.setState( { Modale: true , modalComps , modalTitle } ) ; 
 
 	}
@@ -92,6 +92,7 @@ class Application extends React.Component <appProps , appState>{
 			<div className="tspace-1" >
 				<SearchTag
 					editePage={ ( name )=> this.handleShowModal( 'EditePage' , lang( 'modalEditPageTitle' ,{ name }) ) }
+					editePageRecherche={ ( name )=> this.handleShowModal( 'EditePageRecherche' , lang( 'modalEditPageTitle' ,{ name }) ) }
 					></SearchTag>
 			</div>
 

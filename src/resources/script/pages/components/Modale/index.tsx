@@ -4,8 +4,9 @@ import { Modal , Button } from 'react-bootstrap';
 //Importation de tout les composante qui utilise le modale 
 import EditePage from '../admin/EditePage/';
 import EditeProduit from '../admin/EditeProduit/';
+import EditePageRecherche from '../admin/EditePageRecherche/'
 
-let comps = { EditePage , EditeProduit } ; 
+let comps = { EditePage , EditeProduit , EditePageRecherche } ; 
 
 interface modaleProps {
 
