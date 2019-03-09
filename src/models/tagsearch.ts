@@ -4,8 +4,8 @@ import { SequelizeAttributes } from '../interface/SequelizeAttributes';
 export interface TagsearchAttributes {
 
     id?: number;
-    value?: number;
-    text?: string;
+    valueTag?: number;
+    textTag?: string;
 
 };
 
@@ -16,10 +16,10 @@ export interface TagsearchInstance extends Sequelize.Instance<TagsearchAttribute
 export const TagsearchFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<TagsearchInstance, TagsearchAttributes> => {
     
     const attributes: SequelizeAttributes<TagsearchAttributes> = {
-      value: {
+      valueTag: {
           type: DataTypes.STRING
       },
-      text: {
+      textTag: {
           type: DataTypes.STRING
       }
     };

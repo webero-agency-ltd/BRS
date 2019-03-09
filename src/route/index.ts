@@ -98,6 +98,15 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	
 	/****************************************************************/
 
+
+	/****************************************************************
+	*	Route de pa tagsearch
+	****************************************************************/
+	app.get('/tagsearch',require('../controller/tagsearch/index').bind({db})) ; 
+	app.post('/tagsearcht',validator.bind({rull:'tagsearchCreate'}),require('../controller/tagsearch/create').bind({db})) ;
+	app.delete('/tagsearch',require('../controller/tagsearch/delete').bind({db}));
+	/****************************************************************/
+ 
 	app.get('/token',require('../controller/ifstToken').bind({db})) ; 
 
 	/*
