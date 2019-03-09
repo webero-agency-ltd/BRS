@@ -43,14 +43,41 @@ export default class tagSearchStore  {
 
 	}
 
-	addTag( textTag : string, valueTag : string ) :void {
+	addTag( textTag : string, valueTag : string ): Promise<boolean> {
 
-		this.tags = [{ 
-			id  	: tagSearchStore.increment() , 
-			textTag , 
-			valueTag ,  
-		}, ...this.tags ] ; 
-		this.alert() ; 
+		return new Promise<boolean>( async (resolve) => { 
+
+			let url = '/tagSearch';
+
+			let response = await fetch( url ,{
+
+				method : 'POST' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+
+				body : JSON.stringify({ textTag , valueTag })
+
+			})
+
+
+			if ( response.ok ) {
+
+				let data = await response.json() as tagSearch ;
+				
+				//option = ( data['option'] ) as string  ;
+
+				this.tags = [data, ...this.tags ] ; 
+
+				this.alert() ; 
+
+				return resolve( true ) ; 
+
+			}
+
+			return resolve( false ) ; 
+			
+		}); 
 
 	}
 
@@ -96,36 +123,6 @@ export default class tagSearchStore  {
 			
 		});
 
-	}
-
-	/*
-	*	Envoyer tout les tags au serveur 
-	*/
-	storeTags( data :string ) : Promise<boolean>{
-
-		return new Promise<boolean>( async (resolve) => { 
-
-			let url = '/admin/tags';
-
-			let response = await fetch( url ,{
-
-				method : 'POST' , 
-				headers : {
-					'Content-Type' : 'application/json'
-				},
-
-				body : JSON.stringify({ tags : this.tags , option : data })
-
-			})
-
-			if ( response.ok ) {
-				return resolve( true ) ; 
-			}
-
-			return resolve( false ) ; 
-			
-		}); 
-		
 	}
 
 }

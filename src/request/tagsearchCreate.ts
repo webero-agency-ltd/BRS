@@ -1,13 +1,13 @@
 module.exports = {
 
-    text: {
+    textTag: {
         presence: true,
           length: {
             maximum: 255, 
             message: "must be at least 6 characters and < 255"
         }
     },
-    value: {
+    valueTag: {
         presence: true,
           length: {
             maximum: 255, 

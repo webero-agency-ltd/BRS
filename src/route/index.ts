@@ -27,7 +27,10 @@ function loggedIn(req, res, next) {
 */
 function guard(req, res, next) {
 
-	if (req.user) {
+	if( req.user && req.role =='admin'){
+        res.redirect('/admin');
+	}
+	else if (req.user) {
         res.redirect('/');
     } else {
         next();
@@ -103,7 +106,7 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	*	Route de pa tagsearch
 	****************************************************************/
 	app.get('/tagsearch',require('../controller/tagsearch/index').bind({db})) ; 
-	app.post('/tagsearcht',validator.bind({rull:'tagsearchCreate'}),require('../controller/tagsearch/create').bind({db})) ;
+	app.post('/tagsearch',validator.bind({rull:'tagsearchCreate'}),require('../controller/tagsearch/create').bind({db})) ;
 	app.delete('/tagsearch',require('../controller/tagsearch/delete').bind({db}));
 	/****************************************************************/
  

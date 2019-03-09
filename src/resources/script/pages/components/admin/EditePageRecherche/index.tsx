@@ -43,11 +43,11 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 		this.updateTextTag = this.updateTextTag.bind(this);
 		this.updateValueTag = this.updateValueTag.bind(this);
-		this.addTag = this.addTag.bind(this);
+		this.onSubmite = this.onSubmite.bind(this);
 
 	}
 
-	async componentDidMount(){
+	componentDidMount(){
 
 		//this.setState({ opTag : await this.store.find() }) ; 
 
@@ -57,24 +57,22 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 	    
 	    /*let setStore = await this.store.storeTags( this.state.opTag ) ; 
 	    if ( setStore ) {
-	    	this.props.close() ; 
+	    	
 	    }*/
+
+	    if( ! this.state.textTag || ! this.state.valueTag )
+			return ;
+		let res = await this.store.addTag( this.state.textTag , this.state.valueTag )
+		if ( res ) {
+			//this.props.close() ; 
+			this.setState({textTag : '',valueTag : ''}) ; 
+		}
 
 	}
 
 	supr( tag : tagSearch ){
 
 		this.store.removeTag( tag ) ; 
-
-	}
-
-	addTag(){
-
-		if( ! this.state.textTag || ! this.state.valueTag )
-			return ;
-
-		this.store.addTag( this.state.textTag , this.state.valueTag )
-		this.setState({textTag : '',valueTag : ''}) ; 
 
 	}
 
@@ -119,7 +117,7 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 					    <Form.Control value={ valueTag } onChange={ this.updateValueTag } type="text" placeholder={ lang('modalvalueTag') } />
 					</Form.Group> 
 
-				   	<Button onClick={ this.addTag } variant="outline-secondary">{lang('modalTagAdd')}</Button>
+				   	<Button onClick={ this.onSubmite } variant="outline-secondary">{lang('modalTagAdd')}</Button>
 				</Form>
 			</div>
 		</div>
