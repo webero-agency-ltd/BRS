@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Badge , Button , FormControl , ListGroup , Form } from 'react-bootstrap';
 
-import lang from '../../../../libs/lang' ;
-import { tag } from '../../../interface/tag' ;
-import produitStore from '../../../stores/produitStore' ;
+import lang from '../../../libs/lang' ;
+import { tag } from '../../interface/tag' ;
+import produitStore from '../../stores/produitStore' ;
 
 interface erreur{
 	name : string , 

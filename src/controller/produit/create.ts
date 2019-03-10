@@ -5,12 +5,12 @@ import { DbInterface } from '../../interface/DbInterface';
 
 module.exports = function  ( req:Request, res:Response ) {
 
-	let { Tagsearch } = this.db as DbInterface ;
-	let { textTag , valueTag } = req.body ;  
+	let { Produit } = this.db as DbInterface ;
+	let { name , prixLv1 , prixLv2 , tag } = req.body ;  
 
-	Tagsearch.create({ textTag , valueTag })
-		.then(tag => {
-		  	res.response( tag , 200)
+	Produit.create({name,prixLv1,prixLv2,tag})
+		.then(produit => {
+		  	res.response( produit , 200)
 		})
 		.catch( e => res.response( {} , 200) )
 

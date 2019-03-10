@@ -1,7 +1,7 @@
 
 import { Request , Response }  from 'express' ; 
 
-import { find } from '../../../lib/tags'
+import { find } from '../../lib/tags'
 
 module.exports = async function ( req:Request, res:Response ) {
 

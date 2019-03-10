@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Row , Col , Alert , Button } from 'react-bootstrap';
 
-import lang from '../../../../libs/lang' ; 
+import lang from '../../../libs/lang' ; 
 
 export default class Token extends React.Component{
 

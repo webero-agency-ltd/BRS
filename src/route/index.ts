@@ -54,7 +54,6 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	/****************************************************************
 	*	Route des authentiffication utilisateur 
 	****************************************************************/
- 
 	app.get('/login',guard,require('../controller/login/').bind({db})) ; 
 
 	app.post('/login',function (req, res, next) {
@@ -81,36 +80,35 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	  	req.logout();
 	  	res.redirect('/');
 	});
-
 	/****************************************************************/
+
+
+	/****************************************************************
+	*	Route des tag de l'applications  
+	****************************************************************/
+	app.get('/admin/tags',validator.bind({rull:''}),require('../controller/tags/').bind({db})) ; 
+	app.post('/admin/tags',require('../controller/tags/create').bind({db})); 
+	/****************************************************************/
+
+
+	/****************************************************************
+	*	Route des produits de l'applications   
+	****************************************************************/
+	//les différent route du produit
+	app.get('/admin/produit',require('../controller/produit/index').bind({db})) ; 
+	app.post('/admin/produit',validator.bind({rull:'produitCreate'}),require('../controller/produit/create').bind({db})) ;
+	app.put('/admin/produit',validator.bind({rull:'produitUpdate'}),require('../controller/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
+	app.delete('/admin/produit',require('../controller/produit/delete').bind({db}));
+	/****************************************************************/
+
+
 
 	/****************************************************************
 	*	Route des l'administrateur de l'application 
 	****************************************************************/
-	app.get('/admin',require('../controller/admin/index').bind({db})) ; 
-	
-	// admin ajoute de tag et 
-	app.get('/admin/tags',validator.bind({rull:''}),require('../controller/admin/tags/find').bind({db})) ; 
-	app.post('/admin/tags',require('../controller/admin/tags/create').bind({db})); 
-	
-	//les différent route du produit
-	app.get('/admin/produit',require('../controller/admin/produit/index').bind({db})) ; 
-	app.post('/admin/produit',validator.bind({rull:'produitCreate'}),require('../controller/admin/produit/create').bind({db})) ;
-	app.put('/admin/produit',validator.bind({rull:'produitUpdate'}),require('../controller/admin/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
-	app.delete('/admin/produit',require('../controller/admin/produit/delete').bind({db}));
-	
-	/****************************************************************/
-
-
-	/****************************************************************
-	*	Route de pa tagsearch
-	****************************************************************/
-	app.get('/tagsearch',require('../controller/tagsearch/index').bind({db})) ; 
-	app.post('/tagsearch',validator.bind({rull:'tagsearchCreate'}),require('../controller/tagsearch/create').bind({db})) ;
-	app.delete('/tagsearch',require('../controller/tagsearch/delete').bind({db}));
-	/****************************************************************/
- 
+	app.get('/admin',require('../controller/admin').bind({db})) ; 
 	app.get('/token',require('../controller/ifstToken').bind({db})) ; 
+	/****************************************************************/
 
 	/*
 	*	Récupération Affilier des utilisateur

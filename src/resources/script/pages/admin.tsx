@@ -1,8 +1,8 @@
 import * as React from 'react'
 import reactDom from 'react-dom'
-import Token from './components/admin/Token/'
-import SearchTag from './components/admin/SearchTag/'
-import Produit from './components/admin/Produit/'
+import Token from './components/Token/'
+import Tagmanager from './components/Tagmanager/'
+import Produit from './components/Produit/'
 
 import Modals from './components/Modale/'
 import { Container , Row , Col } from 'react-bootstrap';
@@ -14,8 +14,9 @@ declare global {
     namespace JSX {
         interface IntrinsicElements {
             'Token': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-            'EditePage': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'EditePageAffiliet': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'EditePageRecherche': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'Tagmanager': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'Produit': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }
@@ -40,6 +41,8 @@ interface appState {
 
 	modalTitle : string
 
+	modalBtn : object
+
 } 
 
 
@@ -54,6 +57,7 @@ class Application extends React.Component <appProps , appState>{
 			Modale  : false , 
 			modalComps  : '' , 
 			modalTitle : '' ,
+			modalBtn : {} ,
 
 		}
 
@@ -72,31 +76,51 @@ class Application extends React.Component <appProps , appState>{
 	*	Affichage du modale 
 	*/
 
-	handleShowModal( modalComps : string , modalTitle : string ){
+	handleShowModal( modalComps : string , modalTitle : string , modalBtn = {} ){
+		this.setState( { Modale: true , modalComps , modalTitle , modalBtn } ) ; 
+	
+	}
 
-		this.setState( { Modale: true , modalComps , modalTitle } ) ; 
+	/*
+	*	Ouvrire modale edute affilet 
+	*/
+	EditePageAffiliet(){
+
+		this.handleShowModal( 
+			'EditePageAffiliet' , 
+			lang('modale_title_page_affiliet',{ name }) 
+		)
+
+	}
+
+	editePageRecherche(){
+
+		this.handleShowModal(
+			'EditePageRecherche' , 
+			lang('modalEditPageTitle',{ name }),
+			{ submit: 'Crée le tag' , cancel : 'suprimer le tag'})
 
 	}
 
 	render(){
 
 
-		const { Modale , modalComps , modalTitle } = this.state
+		const { Modale , modalComps , modalTitle , modalBtn } = this.state
 
 		return <Container>
 
-			<div className="tspace-1" >
+			<div className="tspace-1">
 				<Token/>
 			</div>
 
-			<div className="tspace-1" >
-				<SearchTag
-					editePage={ ( name )=> this.handleShowModal( 'EditePage' , lang( 'modalEditPageTitle' ,{ name }) ) }
-					editePageRecherche={ ( name )=> this.handleShowModal( 'EditePageRecherche' , lang( 'modalEditPageTitle' ,{ name }) ) }
-					></SearchTag>
+			<div className="tspace-1">
+				<Tagmanager
+					editePageAffiliet={ ()=> this.EditePageAffiliet() }
+					editePageRecherche={ ()=> this.editePageRecherche() }
+					></Tagmanager>
 			</div>
 
-			<div className="tspace-1" >
+			<div className="tspace-1">
 				<Produit
 					editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalProduitTitle' ,{ name }) ) }
 					></Produit>
@@ -106,6 +130,7 @@ class Application extends React.Component <appProps , appState>{
 				title={ modalTitle }
 				show={ Modale } 
 				type={ modalComps }
+				btn={ modalBtn }
 				closeModal={ () => this.handleCloseModal() }
 				></Modals>
 		  	

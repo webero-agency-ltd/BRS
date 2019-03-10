@@ -1,18 +1,39 @@
+import * as Sequelize from 'sequelize';
+import { SequelizeAttributes } from '../interface/SequelizeAttributes';
 
-const type = require('sequelize');
-const { Instance } = require('../config/sequelize');
+export interface TagAttributes {
 
-module.exports = () => {
+    id?: number;
+    name?: string;
+    value?: string;
+    page_id?: number;
+    rull?: number;
+
+};
+
+export interface TagInstance extends Sequelize.Instance<TagAttributes>, TagAttributes {
     
-    return Instance.define('user', {
-        id: {
-          	type: type.INTEGER,
-          	primaryKey: true,
-          	autoIncrement: true
-        },
-        option: type.STRING,
-        tags: type.JSON,
-    })
+}; 
 
-}
+export const TagFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<TagInstance, TagAttributes> => {
+    
+    const attributes: SequelizeAttributes<TagAttributes> = {
+      name: {
+          type: DataTypes.STRING
+      },
+      value: {
+          type: DataTypes.STRING
+      },
+      page_id: {
+          type: DataTypes.INTEGER 
+      },
+      rull: {
+          type: DataTypes.INTEGER 
+      }
+    };
 
+    const Tag = sequelize.define<TagInstance, TagAttributes>('Tag', attributes);
+
+    return Tag ;
+
+};

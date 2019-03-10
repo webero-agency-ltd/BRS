@@ -2,11 +2,11 @@ import * as React from 'react'
 
 import { Modal , Button } from 'react-bootstrap';
 //Importation de tout les composante qui utilise le modale 
-import EditePage from '../admin/EditePage/';
-import EditeProduit from '../admin/EditeProduit/';
-import EditePageRecherche from '../admin/EditePageRecherche/'
+import EditePageAffiliet from '../EditePageAffiliet/';
+import EditeProduit from '../EditeProduit/';
+import EditePageRecherche from '../EditePageRecherche/'
 
-let comps = { EditePage , EditeProduit , EditePageRecherche } ; 
+let comps = { EditePageAffiliet , EditeProduit , EditePageRecherche } ; 
 
 interface modaleProps {
 
@@ -14,6 +14,7 @@ interface modaleProps {
 	closeModal : () => void 
 	type : string 
 	title : string 
+	btn : object 
 
 }
 
@@ -44,7 +45,9 @@ export default class Modale extends React.Component <modaleProps , modaleStade>{
 
 	render(){
 
-		let { show , closeModal , type , title } = this.props ; 
+		let { show , closeModal , type , title , btn } = this.props ; 
+
+		console.log( btn ) ; 
 
 		const TagName = comps[type] ;
 
@@ -61,8 +64,8 @@ export default class Modale extends React.Component <modaleProps , modaleStade>{
 		  	</Modal.Body>
 
 		  	<Modal.Footer>
-		    	<Button onClick={ closeModal } variant="secondary">Close</Button>
-		    	<Button onClick={ ()=>{ this.submit() } } variant="primary">Save changes</Button>
+		    	<Button onClick={ closeModal } variant="secondary">{ btn['cancel'] ? btn['cancel'] : 'Close' }</Button>
+		    	<Button onClick={ ()=>{ this.submit() } } variant="primary">{ btn['submit'] ? btn['submit'] : 'Save' }</Button>
 		  	</Modal.Footer>
 
 		</Modal>

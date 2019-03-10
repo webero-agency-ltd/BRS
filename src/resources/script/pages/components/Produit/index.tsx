@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Row , Col , ListGroup , Badge } from 'react-bootstrap';
 
-import lang from '../../../../libs/lang' ;
+import lang from '../../../libs/lang' ;
 
-import { produit } from '../../../interface/produit' ;
+import { produit } from '../../interface/produit' ;
 
-import produitStore from '../../../stores/produitStore' ;
+import produitStore from '../../stores/produitStore' ;
 
 
 interface searchTagProps {

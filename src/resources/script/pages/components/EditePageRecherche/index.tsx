@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Badge , Button , FormControl , ListGroup , Form } from 'react-bootstrap';
 
-import lang from '../../../../libs/lang' ;
+import lang from '../../../libs/lang' ;
 
-import { tagSearch } from '../../../interface/tagSearch' ;
+import { tagSearch } from '../../interface/tagSearch' ;
 
-import tagSearchStore from '../../../stores/tagSearchStore' ;
+import tagSearchStore from '../../stores/tagSearchStore' ;
 
 
 interface searchTagProps {

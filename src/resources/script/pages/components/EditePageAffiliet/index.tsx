@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Badge , Button , FormControl , ListGroup , Form } from 'react-bootstrap';
 
-import lang from '../../../../libs/lang' ;
+import lang from '../../../libs/lang' ;
 
-import { tag } from '../../../interface/tag' ;
+import { tag } from '../../interface/tag' ;
 
-import tagStore from '../../../stores/tagStore' ;
+import tagStore from '../../stores/tagStore' ;
 
 
 interface searchTagProps {
@@ -95,34 +95,28 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 		let { tags , newTag , opTag } = this.state ; 
 
 		return <div>
-
 			<div>
 				<ListGroup>
 				  	{tags.map((e)=>{
 				  		return <ListGroup.Item key={e.id}>
 				  			{e.text} 
-				  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="info">{lang('modalDelTag')} </Badge>
+				  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="info">{lang('delete')} </Badge>
 				  		</ListGroup.Item>
 				  	})}
 				</ListGroup>
 			</div>
 			<div>
-
 				<Form>
-
 					<Form.Group>
-					    <Form.Control value={ newTag } onChange={ this.updateNewTag } type="text" placeholder={ lang('modalTagInput') } />
+					    <Form.Control value={ newTag } onChange={ this.updateNewTag } type="text" placeholder={ lang('tag_value') } />
 					</Form.Group>
-
 					<Form.Group>
 						<Form.Control value={ opTag } onChange={ this.updateOpTag } as="select">
-					      	<option value="1" >{lang('modalSelect1')}</option>
-					      	<option value="2" >{lang('modalSelect2')}</option>
-					     	<option value="3" >{lang('modalSelect3')}</option>
+					      	<option value="1" >{lang('tag_rull1')}</option>
+					      	<option value="2" >{lang('tag_rull2')}</option>
+					     	<option value="3" >{lang('tag_rull3')}</option>
 					    </Form.Control>
 					</Form.Group>
-
-				   	<Button onClick={ this.addTag } variant="outline-secondary">{lang('modalTagAdd')}</Button>
 				</Form>
 			</div>
 		</div>
