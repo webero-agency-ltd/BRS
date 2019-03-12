@@ -1,70 +1,103 @@
 
+import Store from './Store' ;
 
 import { tag } from '../interface/tag' ;
 
 declare type ChangeCallback = ( store : tagStore ) => void 
 
-export default class tagStore  {
+export default class tagStore extends Store {
 	
-	public tags : tag[]
+	public tags : tag[] ; 
 
-	private callback : ChangeCallback[] = [] ; 
+	private page_id : number;
 
-	private static i : number  = 0; 
-
-	static increment(){
-
-		if (this.i===null) {
-			this.i = 0  ; 
-		}
-		return this.i++;
-	
-	}
-
-	constructor() {
-		
+	constructor( page_id ) {
+		super() ; 
 		this.tags = [] ; 
+		this.page_id = page_id ; 
 
 	}
 
-	onChange( cbl : ChangeCallback){
-		
-		this.callback.push( cbl ) ; 
+	addTag( name:string,value:string,rull:string ) : Promise<boolean> {
+
+		return new Promise<boolean>( async (resolve) => { 
+
+			let url = '/tags';
+
+			let page_id = this.page_id ; 
+			let response = await fetch( url ,{
+
+				method : 'POST' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body : JSON.stringify({ name , value , page_id , rull })
+
+			})
+
+			if ( response.ok ) {
+
+				let data = await response.json() ;
+
+				this.tags = [{
+					id  		: data.id , 
+					name 		: data.name , 
+					value 		: data.value , 
+					page_id 	: data.page_id , 
+				}, ...this.tags ] ; 
+
+				super.alert() ; 
+				
+				return resolve( true ) ; 
+			
+			}
+
+			return resolve( false ) ; 
+			
+		});
+
 
 	}
 
-	/*
-	*	Alerté les composante qu'il y a des changements 
-	*/
+	removeTag( tag : tag ) : Promise<boolean>  {
 
-	alert(){
+		return new Promise<boolean>( async (resolve) => { 
 
-		this.callback.forEach( cbl => cbl( this ) ) ; 
+			let url = '/tags';
 
-	}
+			let page_id = this.page_id ; 
+			let response = await fetch( url ,{
 
-	addTag( text : string ) :void {
+				method : 'DELETE' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body : JSON.stringify( tag )
 
-		this.tags = [{
-			id  	: tagStore.increment() , 
-			text , 
-		}, ...this.tags ] ; 
+			})
 
-		this.alert() ; 
+			if ( response.ok ) {
 
-	}
+				let data = await response.json() ;
 
-	removeTag( tag : tag ) :void {
-		
-		this.tags = this.tags.filter( e => e !== tag ) ;
-		this.alert() ; 
+				this.tags = this.tags.filter( e => e !== tag ) ;
+
+				super.alert() ; 
+				
+				return resolve( true ) ; 
+			
+			}
+
+			return resolve( false ) ; 
+			
+		});
 
 	}
 
 	editTag( tag : tag , text : string ) :void {
 
 		this.tags = this.tags.map( e => e !== tag ? {...e , text } : e ) ; 
-		this.alert() ; 
+		super.alert() ; 
 
 	}
 
@@ -72,60 +105,26 @@ export default class tagStore  {
 
 		return new Promise<string>( async (resolve) => { 
 
-			let url = '/admin/tags';
+			let url = '/tags?page_id='+this.page_id;
 
 			let response = await fetch( url )
 
-			let data = {} ; 
 			let tags : tag[] = [] ; 
 			let option : string = '1' ;
 
 			if ( response.ok ) {
-				data = await response.json() ; 
-				tags = ( data['tags'] ) as tag[] ;
-				option = ( data['option'] ) as string  ; 
-			}
+				let data = await response.json() as tag[] ;
+				for( let d of data ){
+					this.tags = [ d , ...this.tags ] ;
+				} 
+			} 
 
-			this.tags = [ ...tags ] ; 
-
-			tagStore.i = this.tags.length ; 
-
-			this.alert() ; 
+			super.alert() ; 
 
 			return resolve( option ) ;
 			
 		});
 
-	}
-
-	/*
-	*	Envoyer tout les tags au serveur 
-	*/
-	storeTags( data :string ) : Promise<boolean>{
-
-		return new Promise<boolean>( async (resolve) => { 
-
-			let url = '/admin/tags';
-
-			let response = await fetch( url ,{
-
-				method : 'POST' , 
-				headers : {
-					'Content-Type' : 'application/json'
-				},
-
-				body : JSON.stringify({ tags : this.tags , option : data })
-
-			})
-
-			if ( response.ok ) {
-				return resolve( true ) ; 
-			}
-
-			return resolve( false ) ; 
-			
-		}); 
-		
 	}
 
 }

@@ -54,6 +54,7 @@ export default class contactsStore  {
 			let option : string = '1' ;
 
 			if ( response.ok ) { 
+
 				data = await response.json() ; 
 
 				console.log( data ) ; 

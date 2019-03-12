@@ -10,16 +10,20 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	let { Tag } = this.db as DbInterface ;
 
-	let data = await find() ;
-
-	Tag.findAll({where: {
-      	page_id: req.query.page_id
-    }})
-
-	.then(tag => {
-	  	res.response( tag , 200)
+	console.log( req.body.id ) ;
+	Tag.destroy({
+	    where: {
+	      	id: req.body.id 
+	    }
 	})
-	
-	.catch( e => res.response( [] , 200) )
+
+	.then(x => {
+	  	res.response( { success : true } , 200)
+	})
+
+	.catch( e => {
+		console.log( e )
+		res.response( {} , 200) 
+	});
 
 };

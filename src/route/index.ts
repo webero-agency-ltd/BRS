@@ -86,8 +86,9 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	/****************************************************************
 	*	Route des tag de l'applications  
 	****************************************************************/
-	app.get('/admin/tags',validator.bind({rull:''}),require('../controller/tags/').bind({db})) ; 
-	app.post('/admin/tags',require('../controller/tags/create').bind({db})); 
+	app.get('/tags',validator.bind({rull:''}),require('../controller/tags/').bind({db})) ; 
+	app.post('/tags',require('../controller/tags/create').bind({db})); 
+	app.delete('/tags',require('../controller/tags/delete').bind({db})); 
 	/****************************************************************/
 
 

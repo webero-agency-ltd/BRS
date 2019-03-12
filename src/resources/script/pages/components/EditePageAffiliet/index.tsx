@@ -17,15 +17,15 @@ interface searchTagProps {
 interface searchTagState {
 	
 	tags : tag[]
-	newTag : string 
-	opTag : string 
+	name : string 
+	value : string 
+	rull : string 
 
 } 
 
-
 export default class EditePage extends React.Component<searchTagProps,searchTagState>{
 
-	private store : tagStore = new tagStore()
+	private store : tagStore = new tagStore(1)
 
 	constructor(props){
 
@@ -33,73 +33,69 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 		this.state = {
 			tags  :  [] , 
-			newTag : '' ,
-			opTag : '1' , 
+			name : '' ,
+			value : '' ,
+			rull : '1' , 
 		}
 
 		this.store.onChange(( store )=>{
+			console.log( '--change tore: ' ,store ) ;  
 			this.setState( {tags : store.tags }) ; 
 		})
 
 		this.updateNewTag = this.updateNewTag.bind(this);
 		this.updateOpTag = this.updateOpTag.bind(this);
-		this.addTag = this.addTag.bind(this);
+		this.onSubmite = this.onSubmite.bind(this);
 
 	}
 
-	async componentDidMount(){
+	componentDidMount(){
 
-		this.setState({ opTag : await this.store.find() }) ; 
+		this.store.find() ; 
 
 	}
 
 	async onSubmite() {
 	    
-	    let setStore = await this.store.storeTags( this.state.opTag ) ; 
-	    if ( setStore ) {
-	    	this.props.close() ; 
-	    }
+	    /*if ( setStore ) { this.props.close() ;  }*/
+
+	    if( !this.state.value || !this.state.rull )
+			return ;
+		
+		let isadd = await this.store.addTag( '',this.state.value,this.state.rull ) ; 
+
+		if ( isadd ) {
+			this.setState({value : ''}) ; 
+		}
 
 	}
 
 	supr( tag : tag ){
-
 		this.store.removeTag( tag ) ; 
-
-	}
-
-	addTag(){
-
-		if( ! this.state.newTag )
-			return ;
-
-		this.store.addTag( this.state.newTag )
-		this.setState({newTag : ''}) ; 
-
 	}
 
 	updateNewTag( e ){
 
-		this.setState({ newTag : (e.target as HTMLInputElement ).value }) ; 
+		this.setState({ value : (e.target as HTMLInputElement ).value }) ; 
 
 	}
 
 	updateOpTag( e ){
 
-		this.setState({ opTag : (e.target as HTMLInputElement ).value }) ;  
+		this.setState({ rull : (e.target as HTMLInputElement ).value }) ;  
 
 	}
 
 	render(){
 		
-		let { tags , newTag , opTag } = this.state ; 
+		let { tags , value , rull } = this.state ; 
 
 		return <div>
 			<div>
 				<ListGroup>
 				  	{tags.map((e)=>{
 				  		return <ListGroup.Item key={e.id}>
-				  			{e.text} 
+				  			{ e.name!==''?e.name:e.value } 
 				  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="info">{lang('delete')} </Badge>
 				  		</ListGroup.Item>
 				  	})}
@@ -108,10 +104,10 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 			<div>
 				<Form>
 					<Form.Group>
-					    <Form.Control value={ newTag } onChange={ this.updateNewTag } type="text" placeholder={ lang('tag_value') } />
+					    <Form.Control value={ value } onChange={ this.updateNewTag } type="text" placeholder={ lang('tag_value') } />
 					</Form.Group>
 					<Form.Group>
-						<Form.Control value={ opTag } onChange={ this.updateOpTag } as="select">
+						<Form.Control value={ rull } onChange={ this.updateOpTag } as="select">
 					      	<option value="1" >{lang('tag_rull1')}</option>
 					      	<option value="2" >{lang('tag_rull2')}</option>
 					     	<option value="3" >{lang('tag_rull3')}</option>

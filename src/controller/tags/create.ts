@@ -7,9 +7,9 @@ module.exports = function  ( req:Request, res:Response ) {
 
 	let { Tag } = this.db as DbInterface ; 
 
-	let { name , value , page_id , rull } = req.body  ; 
+	let { name , value , page_id } = req.body  ; 
 
-	Tag.create({name,value,page_id,rull})
+	Tag.create({name,value,page_id})
 		
 		.then(tag => {
 		  	res.response( tag , 200)

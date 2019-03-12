@@ -1,4 +1,8 @@
 export interface tag{
-	id : number
-	text : string
+	
+	id?: number;
+    name?: string;
+    value?: string;
+    page_id?: number;
+
 }
