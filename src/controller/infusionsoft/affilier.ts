@@ -1,8 +1,6 @@
 
 import { Request , Response }  from 'express' ; 
 
-import { find } from '../../lib/tags';
-
 import { tagPageOption , infusionTag } from '../../interface/tagPageOption';
 
 import { filter } from '../../lib/filter'
@@ -76,6 +74,7 @@ let userComp = function ( users : any , tags : infusionTag[] , produits : Produi
 
 module.exports = async function ( req:Request, res:Response ) {
 
+	/*
 	let { Produit } = this.db as DbInterface ;
 
 	//initialisation ou récupération des donner infusion soft 
@@ -137,5 +136,6 @@ module.exports = async function ( req:Request, res:Response ) {
 	let users = userComp( finale['users'] , tags , allproduit ) ;  
 
 	return res.response( { users , tags : finale['tags'] } ,200) ;
+	*/
  
 };

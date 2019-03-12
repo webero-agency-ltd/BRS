@@ -7,6 +7,8 @@ import { tag } from '../../interface/tag' ;
 
 import tagStore from '../../stores/tagStore' ;
 
+import configStore from '../../stores/configStore' ;
+
 
 interface searchTagProps {
 
@@ -27,6 +29,8 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	private store : tagStore = new tagStore(1)
 
+	private config : configStore = new configStore()
+
 	constructor(props){
 
 		super(props) ; 
@@ -39,7 +43,6 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 		}
 
 		this.store.onChange(( store )=>{
-			console.log( '--change tore: ' ,store ) ;  
 			this.setState( {tags : store.tags }) ; 
 		})
 
@@ -49,9 +52,18 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	}
 
-	componentDidMount(){
+	componentDidMount(){ 
 
 		this.store.find() ; 
+
+		this.initEdit() ; 
+
+	}
+
+	async initEdit(){
+
+		let rull = await this.config.find('rull') ;
+		this.setState( {rull} ) ; 
 
 	}
 
@@ -80,9 +92,11 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	}
 
-	updateOpTag( e ){
+	async updateOpTag( e ){
 
-		this.setState({ rull : (e.target as HTMLInputElement ).value }) ;  
+		let value = (e.target as HTMLInputElement ).value ; 
+		this.setState({ rull : value }) ;  
+		let isadd = await this.config.editConfig( 'rull',value ) ; 
 
 	}
 

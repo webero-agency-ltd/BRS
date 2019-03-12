@@ -93,6 +93,14 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 
 
 	/****************************************************************
+	*	Route des la config de l'application  
+	****************************************************************/
+	app.get('/config',validator.bind({rull:''}),require('../controller/config/').bind({db})) ; 
+	app.post('/config',require('../controller/config/edite').bind({db})); 
+	/****************************************************************/
+
+
+	/****************************************************************
 	*	Route des produits de l'applications   
 	****************************************************************/
 	//les différent route du produit

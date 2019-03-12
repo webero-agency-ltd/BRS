@@ -10,4 +10,5 @@ export interface DbInterface {
   	User: Sequelize.Model<UserInstance, UserAttributes>;
   	Produit: Sequelize.Model<ProduitInstance, ProduitAttributes>;
   	Tag: Sequelize.Model<TagInstance, TagAttributes>;
+  	Config: Sequelize.Model<TagInstance, TagAttributes>;
 }

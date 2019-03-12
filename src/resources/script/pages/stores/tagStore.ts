@@ -12,6 +12,7 @@ export default class tagStore extends Store {
 	private page_id : number;
 
 	constructor( page_id ) {
+		
 		super() ; 
 		this.tags = [] ; 
 		this.page_id = page_id ; 

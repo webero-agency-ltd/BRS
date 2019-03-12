@@ -1,8 +1,10 @@
 import Sequelize from 'sequelize';
+
 import { DbInterface } from '../interface/DbInterface';
 import { UserFactory } from './user';
 import { ProduitFactory } from './produit';
 import { TagFactory } from './tag';
+import { ConfigFactory } from './config';
 
 export const createModels = (sequelizeConfig: any): DbInterface => {
 
@@ -15,7 +17,8 @@ export const createModels = (sequelizeConfig: any): DbInterface => {
         Sequelize,
         User: UserFactory(sequelize, Sequelize),
         Produit: ProduitFactory(sequelize, Sequelize),
-        Tag: TagFactory(sequelize, Sequelize)
+        Tag: TagFactory(sequelize, Sequelize),
+        Config: ConfigFactory(sequelize, Sequelize) 
     };
 
     Object.keys(db).forEach(modelName => {
