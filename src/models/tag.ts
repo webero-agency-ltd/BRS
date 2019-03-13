@@ -7,7 +7,7 @@ export interface TagAttributes {
     name?: string;
     value?: string;
     page_id?: number;
-    rull?: number;
+    rull?: number; 
 
 };
 

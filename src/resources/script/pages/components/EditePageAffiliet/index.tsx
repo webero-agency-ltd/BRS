@@ -106,6 +106,17 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 		return <div>
 			<div>
+				<Form.Group>
+					<Form.Label>{ lang('tag_rull') }</Form.Label>
+					<Form.Control value={ rull } onChange={ this.updateOpTag } as="select">
+				      	<option value="1" >{lang('tag_rull1')}</option>
+				      	<option value="2" >{lang('tag_rull2')}</option>
+				     	<option value="3" >{lang('tag_rull3')}</option>
+				    </Form.Control>
+				</Form.Group>
+			</div>
+			<hr/>
+			<div>
 				<ListGroup>
 				  	{tags.map((e)=>{
 				  		return <ListGroup.Item key={e.id}>
@@ -115,17 +126,11 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 				  	})}
 				</ListGroup>
 			</div>
+			<hr/>
 			<div>
 				<Form>
 					<Form.Group>
 					    <Form.Control value={ value } onChange={ this.updateNewTag } type="text" placeholder={ lang('tag_value') } />
-					</Form.Group>
-					<Form.Group>
-						<Form.Control value={ rull } onChange={ this.updateOpTag } as="select">
-					      	<option value="1" >{lang('tag_rull1')}</option>
-					      	<option value="2" >{lang('tag_rull2')}</option>
-					     	<option value="3" >{lang('tag_rull3')}</option>
-					    </Form.Control>
 					</Form.Group>
 				</Form>
 			</div>

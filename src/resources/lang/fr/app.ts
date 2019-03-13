@@ -32,6 +32,8 @@ module.exports = {
 	//lang des différent formulaire de l'application 
 	/*****************************************************/
 
+	//régle d'affichage des tags 
+	tag_rull : 'Régle d\'affichage' , 
 	//lang de la tag 
 	tag_value : 'la valuer du tag',
 	tag_name : 'le nom de la tag',
@@ -53,7 +55,6 @@ module.exports = {
 	SearchTagTitle : 'Tag a rechercher par pages' , 
 
 	SearchTagPage : '' ,
-
 
 	/*****************************************************/
 	//lang dans la page recherche  
