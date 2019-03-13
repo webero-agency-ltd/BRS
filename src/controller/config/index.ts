@@ -7,7 +7,7 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	let { Config } = this.db as DbInterface ;
 
-	Config.find({where: {
+	Config.find({where: { 
       	name: req.query.name
     }})
 

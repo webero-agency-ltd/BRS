@@ -6,7 +6,6 @@ import { contacts } from '../../interface/contacts' ;
 
 import contactsStore from '../../stores/contactsStore' ;
 
-
 interface searchTagProps {
 
 } 
@@ -28,15 +27,14 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 		}
 
 		this.store.onChange(( store )=>{
-
-			console.log('LISTEN CONTACT' , store.contacts )
 			this.setState( {contacts : store.contacts }) ; 
 		})
+
 	}
 
-	async componentDidMount(){
+	componentDidMount(){
 
-		let setStore = await this.store.find() ;  
+		this.store.find() ;  
 
 	}
 

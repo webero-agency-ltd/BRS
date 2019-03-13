@@ -55,4 +55,10 @@ module.exports = {
 	SearchTagPage : '' ,
 
 
+	/*****************************************************/
+	//lang dans la page recherche  
+	/*****************************************************/
+
+	r_search_option : 'Tag a chercher',
+
 }

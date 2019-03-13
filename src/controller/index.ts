@@ -10,7 +10,7 @@ module.exports = function ( req:Request, res:Response ) {
 	//voire si un utilisateur est connecté 
 	if (!req.isUser()) {
 		//s'il ny a pas alors on redirige vers la page login
-        return res.redirect('/login');
+        //return res.redirect('/login');
     }
 
 	let { User } = this.db as DbInterface ; 
