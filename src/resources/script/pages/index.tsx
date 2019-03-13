@@ -100,7 +100,7 @@ class Application extends React.Component <appProps , appState>{
 		return <Router><Container>
 				<Row className="tspace-2 bspace-2">
 					<Col>
-						<Nav variant="pills" activeKey="un" >
+						<Nav variant="pills">
 							<Nav.Item>
 								<Link to="/">Dashboard</Link>
 							</Nav.Item>
