@@ -7,6 +7,7 @@ export interface TagAttributes {
     name?: string;
     value?: string;
     page_id?: number;
+    user_id?: number;
     rull?: number; 
 
 };
@@ -25,6 +26,9 @@ export const TagFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.
           type: DataTypes.STRING
       },
       page_id: {
+          type: DataTypes.INTEGER 
+      },
+      user_id: {
           type: DataTypes.INTEGER 
       },
       rull: {

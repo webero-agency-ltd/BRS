@@ -16,13 +16,13 @@ module.exports = function ( req:Request, res:Response ) {
 	let { User } = this.db as DbInterface ; 
 
 	//récupération des fichers langue du login
-	let lang = req.lang('login') ; 
-	
+	let lang = req.lang('app') ; 
+	 
 	//initialisation des infusionsoft
 	if ( ! req.ifstInitToken() ) 
 		//dans ce cas ci le token n'existe pas dans ou expiré infusionsoft
 		res.locals.erreur = lang['erreur_token'] ; 
 	
-	res.render('index.ejs') 
+	res.render('index.ejs',{ lang:JSON.stringify(res.locals.lang) }) 
 
 };

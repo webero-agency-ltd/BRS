@@ -9,6 +9,12 @@
 
 	<body>
 		
+		<script>
+			window.isToken=<%= !locals.erreur %>;
+			window.urlFindToken="<%= locals.urlFindToken %>".replace(/&amp;/g, '&');
+			window.trans= <%- lang.replace(/=&gt;/g, '=>') %>; 
+		</script>
+
 		<!-- Il y a des erreurs -->		
 		<% if( locals.erreur ) { %>
 

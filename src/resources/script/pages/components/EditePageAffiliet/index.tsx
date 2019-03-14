@@ -74,7 +74,7 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 	    if( !this.state.value || !this.state.rull )
 			return ;
 		
-		let isadd = await this.store.addTag( '',this.state.value,this.state.rull ) ; 
+		let isadd = await this.store.addTag( '' , this.state.value ) ; 
 
 		if ( isadd ) {
 			this.setState({value : ''}) ; 

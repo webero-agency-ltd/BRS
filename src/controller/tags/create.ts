@@ -9,7 +9,7 @@ module.exports = function  ( req:Request, res:Response ) {
 
 	let { name , value , page_id } = req.body  ; 
 
-	Tag.create({name,value,page_id})
+	Tag.create({name,value,page_id,user_id:0})
 		
 		.then(tag => {
 		  	res.response( tag , 200)

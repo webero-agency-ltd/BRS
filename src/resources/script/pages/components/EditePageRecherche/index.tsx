@@ -3,9 +3,9 @@ import { Badge , Button , FormControl , ListGroup , Form } from 'react-bootstrap
 
 import lang from '../../../libs/lang' ;
 
-import { tagSearch } from '../../interface/tagSearch' ;
+import { tag } from '../../interface/tag' ;
 
-import tagSearchStore from '../../stores/tagSearchStore' ;
+import tagStore from '../../stores/tagStore' ;
 
 
 interface searchTagProps {
@@ -16,16 +16,16 @@ interface searchTagProps {
 
 interface searchTagState {
 	
-	tags : tagSearch[]
-	textTag : string 
-	valueTag : string 
+	tags : tag[]
+	name : string 
+	value : string 
 
 } 
 
 
 export default class EditePage extends React.Component<searchTagProps,searchTagState>{
 
-	private store : tagSearchStore = new tagSearchStore()
+	private store : tagStore = new tagStore(2)
 
 	constructor(props){
 
@@ -33,8 +33,8 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 		this.state = {
 			tags  :  [] , 
-			textTag : '' ,
-			valueTag : '' , 
+			name : '' ,
+			value : '' ,
 		}
 
 		this.store.onChange(( store )=>{
@@ -47,30 +47,29 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	}
 
-	componentDidMount(){
+	componentDidMount(){ 
 
-		//this.setState({ opTag : await this.store.find() }) ; 
+		this.store.find() ; 
 
 	}
 
 	async onSubmite() {
 	    
-	    /*let setStore = await this.store.storeTags( this.state.opTag ) ; 
-	    if ( setStore ) {
-	    	
-	    }*/
+	    /*if ( setStore ) { this.props.close() ;  }*/
 
-	    if( ! this.state.textTag || ! this.state.valueTag )
+	    if( !this.state.name || !this.state.value )
 			return ;
-		let res = await this.store.addTag( this.state.textTag , this.state.valueTag )
-		if ( res ) {
-			//this.props.close() ; 
-			this.setState({textTag : '',valueTag : ''}) ; 
+		
+		let isadd = await this.store.addTag( this.state.name , this.state.value ) ; 
+
+		if ( isadd ) {
+			this.setState({name : ''}) ; 
+			this.setState({value : ''}) ; 
 		}
 
 	}
 
-	supr( tag : tagSearch ){
+	supr( tag : tag ){
 
 		this.store.removeTag( tag ) ; 
 
@@ -78,19 +77,19 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	updateTextTag( e ){
 
-		this.setState({ textTag : (e.target as HTMLInputElement ).value }) ; 
+		this.setState({ name : (e.target as HTMLInputElement ).value }) ; 
 
 	}
 
 	updateValueTag( e ){
 
-		this.setState({ valueTag : (e.target as HTMLInputElement ).value }) ;  
+		this.setState({ value : (e.target as HTMLInputElement ).value }) ;  
 
 	}
 
 	render(){
 		
-		let { tags , valueTag , textTag } = this.state ; 
+		let { tags , name , value } = this.state ; 
 
 		return <div>
 
@@ -98,26 +97,21 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 				<ListGroup>
 				  	{tags.map((e)=>{
 				  		return <ListGroup.Item key={e.id}>
-				  			{e.textTag} => {e.valueTag}
+				  			{e.name} ({e.value})
 				  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="info">{lang('modalDelTag')} </Badge>
 				  		</ListGroup.Item>
 				  	})}
 				</ListGroup>
 			</div>
-			
+			<hr/>
 			<div>
-
 				<Form>
-
 					<Form.Group>
-					    <Form.Control value={ textTag } onChange={ this.updateTextTag } type="text" placeholder={ lang('modaltextTag') } />
+					    <Form.Control value={ name } onChange={ this.updateTextTag } type="text" placeholder={ lang('modaltextTag') } />
 					</Form.Group>
-
 					<Form.Group>
-					    <Form.Control value={ valueTag } onChange={ this.updateValueTag } type="text" placeholder={ lang('modalvalueTag') } />
+					    <Form.Control value={ value } onChange={ this.updateValueTag } type="text" placeholder={ lang('modalvalueTag') } />
 					</Form.Group> 
-
-				   	<Button onClick={ this.onSubmite } variant="outline-secondary">{lang('modalTagAdd')}</Button>
 				</Form>
 			</div>
 		</div>

@@ -5,8 +5,9 @@ import { Modal , Button } from 'react-bootstrap';
 import EditePageAffiliet from '../EditePageAffiliet/';
 import EditeProduit from '../EditeProduit/';
 import EditePageRecherche from '../EditePageRecherche/'
+import EditePageRechercheUser from '../EditePageRechercheUser/'
 
-let comps = { EditePageAffiliet , EditeProduit , EditePageRecherche } ; 
+let comps = { EditePageAffiliet , EditeProduit , EditePageRecherche , EditePageRechercheUser } ; 
 
 interface modaleProps {
 

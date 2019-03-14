@@ -97,7 +97,7 @@ class Application extends React.Component <appProps , appState>{
 
 		this.handleShowModal(
 			'EditePageRecherche' , 
-			lang('modalEditPageTitle',{ name }),
+			lang('tagmanager_page_recherche',{ name }),
 			{ submit: 'Crée le tag' , cancel : 'suprimer le tag'})
 
 	}

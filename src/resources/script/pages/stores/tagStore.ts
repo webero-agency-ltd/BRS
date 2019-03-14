@@ -11,15 +11,22 @@ export default class tagStore extends Store {
 
 	private page_id : number;
 
-	constructor( page_id ) {
+	private user : boolean;
+
+	constructor( page_id , user?:boolean ) {
 		
 		super() ; 
 		this.tags = [] ; 
-		this.page_id = page_id ; 
+		this.page_id = page_id ;
+
+		if ( user )
+			this.user = user ; 
+		else
+			this.user = false ; 
 
 	}
 
-	addTag( name:string,value:string,rull:string ) : Promise<boolean> {
+	addTag( name:string,value:string ) : Promise<boolean> {
 
 		return new Promise<boolean>( async (resolve) => { 
 
@@ -32,7 +39,7 @@ export default class tagStore extends Store {
 				headers : {
 					'Content-Type' : 'application/json'
 				},
-				body : JSON.stringify({ name , value , page_id , rull })
+				body : JSON.stringify({ name , value , page_id })
 
 			})
 
@@ -57,6 +64,68 @@ export default class tagStore extends Store {
 			
 		});
 
+	}
+
+
+	/*
+	*	Attacher une tag a un utilisateur 
+	*/
+
+	attacheTag( id:string ) : Promise<boolean> {
+
+		return new Promise<boolean>( async (resolve) => { 
+
+			let url = '/tags/attache';
+
+			let page_id = this.page_id ; 
+			let response = await fetch( url ,{
+
+				method : 'POST' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body : JSON.stringify({ id })
+
+			})
+
+			if ( response.ok ) {
+
+				let data = await response.json() ;
+				if ( data.id ) {
+					await this.findAttacheTag() ; 
+					return resolve( true ) ; 
+				}
+			
+			}
+
+			return resolve( false ) ; 
+			
+		});
+		
+	}
+
+	/*
+	*	Récuparation des tags qui est attacher a l'utilisateur qui est connecté 
+	*/
+	findAttacheTag() : Promise<tag[]> {
+
+		return new Promise<tag[]>( async (resolve) => { 
+
+			let url = '/tags/attache' ;
+
+			let response = await fetch( url )
+
+			let tags : tag[] = [] ;
+
+			if ( response.ok ) {
+				let data = await response.json() as tag[] ;
+				super.alert() ; 
+				return resolve( data ) ;
+			} 
+			super.alert() ; 
+			return resolve( [] ) ;
+			
+		});
 
 	}
 
@@ -73,7 +142,7 @@ export default class tagStore extends Store {
 				headers : {
 					'Content-Type' : 'application/json'
 				},
-				body : JSON.stringify( tag )
+				body : JSON.stringify( { ...tag , user : this.user } )
 
 			})
 

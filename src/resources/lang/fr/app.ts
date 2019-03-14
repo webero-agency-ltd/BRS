@@ -27,6 +27,8 @@ module.exports = {
 	create : 'New' ,
 	search : 'Recherche' ,
 	add : 'Ajouter' ,
+	ok : 'Ok' ,
+	cancel : 'Cancel' ,
 
 	/*****************************************************/
 	//lang des différent formulaire de l'application 
@@ -34,6 +36,7 @@ module.exports = {
 
 	//régle d'affichage des tags 
 	tag_rull : 'Régle d\'affichage' , 
+	tag_rull_user : 'Régle d\'affichage que je cherche' , 
 	//lang de la tag 
 	tag_value : 'la valuer du tag',
 	tag_name : 'le nom de la tag',
@@ -41,9 +44,10 @@ module.exports = {
 	tage_name_error : 'La valeur doivent etre une chaine de caractère valide entre 5 et 266 carctère' ,
 	//modale tag manager
 	tagmanager_title : 'Gestion des tags' ,
-	tagmanager_page_affiliet : 'Tag de la page affiliet' ,
+	tagmanager_page_affiliet : 'Tag de la page affilier' ,
 	tagmanager_page_recherche : 'Tag de la page recherche' ,
-	modale_title_page_affiliet : 'Ajoute de tag a la page affiliet' , 	
+	tagmanager_page_recherche_user : 'Mes recherche' ,
+	modale_title_page_affiliet : 'Ajoute de tag a la page affilier' , 	
 
 	tag_rull1 : 'Avec AUCUNE de ces tag' , 
 	tag_rull2 : 'Avec TOUTES ces tag' , 
