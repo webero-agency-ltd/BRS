@@ -66,6 +66,40 @@ export default class tagStore extends Store {
 
 	}
 
+	/*
+	*	Détachement d'un tag a un utilisateur 
+	*/
+	dettacheTag( id:string ){
+
+		return new Promise<boolean>( async (resolve) => { 
+
+			let url = '/tags/attache';
+
+			let page_id = this.page_id ; 
+			let response = await fetch( url ,{
+
+				method : 'DELETE' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body : JSON.stringify({ id })
+
+			})
+
+			if ( response.ok ) {
+
+				let data = await response.json() ;
+				if ( data.id ) {
+					return resolve( true ) ; 
+				}
+			
+			}
+
+			return resolve( false ) ; 
+			
+		});
+
+	}
 
 	/*
 	*	Attacher une tag a un utilisateur 
@@ -92,7 +126,6 @@ export default class tagStore extends Store {
 
 				let data = await response.json() ;
 				if ( data.id ) {
-					await this.findAttacheTag() ; 
 					return resolve( true ) ; 
 				}
 			
@@ -181,6 +214,8 @@ export default class tagStore extends Store {
 
 			let tags : tag[] = [] ; 
 			let option : string = '1' ;
+
+			this.tags = [] ; 
 
 			if ( response.ok ) {
 				let data = await response.json() as tag[] ;

@@ -8,7 +8,6 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	let { Tag } = this.db as DbInterface ;
 
-	console.log( req.body.id ) ;
 	Tag.destroy({
 	    where: {
 	      	id: req.body.id 

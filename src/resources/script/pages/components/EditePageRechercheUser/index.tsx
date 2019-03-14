@@ -60,7 +60,6 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 		await this.store.find() ;
 
 		let attache = await this.store.findAttacheTag() ;
-		console.log( 'Attache file est ICI' , attache ) ; 
 		this.setState({ attache }) ;
 		this.setState( {tags : this.excludeAttache( this.state.temptag , attache ) }) ; 
 
@@ -69,7 +68,6 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 	async onSubmite() {
 
 		//récupération des tags dans l'ID est selectionner	
-		console.log('---------------', this.state.id ) ; 
 		let isadd = await this.store.attacheTag( this.state.id ) ; 
 		if ( isadd ) {
 			this.initattache() ;
@@ -77,9 +75,10 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	}
 
-	supr( tag : tag ){
+	async supr( tag : tag ){
 
-		this.store.removeTag( tag ) ; 
+		await this.store.dettacheTag( tag.id+'' ) ; 
+		this.initattache() ;
 
 	}
 

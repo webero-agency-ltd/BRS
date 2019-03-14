@@ -91,6 +91,7 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	app.delete('/tags',require('../controller/tags/delete').bind({db})); 
 	app.post('/tags/attache',require('../controller/tags/attache').bind({db})); 
 	app.get('/tags/attache',require('../controller/tags/findattache').bind({db})); 
+	app.delete('/tags/attache',require('../controller/tags/deattache').bind({db})); 
 	/****************************************************************/
 
 
