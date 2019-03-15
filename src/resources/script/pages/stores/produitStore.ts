@@ -121,6 +121,32 @@ export default class produitStore extends Store  {
 	}
 
 	/*
+	*	Reset du prix du produit par l'utiliateur 
+	*/
+	deattacheProduit(){
+
+		return new Promise<boolean>( async (resolve) => { 
+
+			let url = '/admin/produit/attache';
+
+			let response = await fetch( url ,{
+				method : 'DELETE' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+			})
+
+			if ( response.ok ) {
+				return resolve( true ) ;
+			}
+
+			return resolve( false ) ;
+			
+		});
+
+	}
+
+	/*
 	*	Attacher produit a un utilisateur 
 	*/
 	attacheProduit( product : produit , price : string ) : Promise<boolean> {

@@ -112,6 +112,7 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	app.put('/admin/produit',validator.bind({rull:'produitUpdate'}),require('../controller/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
 	app.delete('/admin/produit',require('../controller/produit/delete').bind({db}));
 	app.post('/admin/produit/attache',require('../controller/produit/attache').bind({db}));
+	app.delete('/admin/produit/attache',require('../controller/produit/deattache').bind({db}));
 	/****************************************************************/
 
 

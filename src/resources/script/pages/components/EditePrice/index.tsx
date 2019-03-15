@@ -56,6 +56,7 @@ export default class EditePage extends React.Component<priceProps,priceState>{
 
 		this.onSubmite = this.onSubmite.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
+		this.resetPrice = this.resetPrice.bind(this);
 
 	}
 
@@ -73,8 +74,6 @@ export default class EditePage extends React.Component<priceProps,priceState>{
 	}
 
 	async onSubmite() {
-
-	    //9500 tdd - haja 034 98 725 61 - transwell 
 	    
 	    let each = forearch( this.state.produits , async (data,next) => {
 	    	let p = data as produit ; 
@@ -87,6 +86,13 @@ export default class EditePage extends React.Component<priceProps,priceState>{
 	    })
 
 	    each.run() ;  
+
+	}
+
+	async resetPrice(){
+
+		await this.produit.deattacheProduit( );  
+		this.props.close() ;
 
 	}
 
@@ -103,7 +109,7 @@ export default class EditePage extends React.Component<priceProps,priceState>{
 
 		return <div>
 
-			<h6>{ lang('product_price_user',{user}) } </h6>
+			<h6>{ lang('product_price_user',{user}) } <Button onClick={ this.resetPrice } variant="link">Reset</Button></h6>
 			<hr/>
 			<div>
 				<Form>
