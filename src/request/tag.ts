@@ -10,7 +10,7 @@ module.exports = {
           minimum: 2 ,
       		message: tag_lang["tage_value_error"]
     	}
-  	},
+  	}, 
     name: {
       presence: true,
       length: {

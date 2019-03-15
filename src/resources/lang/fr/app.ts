@@ -17,7 +17,7 @@ module.exports = {
 	modalProduitTitle : 'Création nouveaux produit', 
 	modalProduitName : 'Nom produit', 
 	modalProduitPrixLv1 : 'prix affilier niveaux 1', 
-	modalProduitPrixLv2 : 'prix affilier niveaux 1', 
+	modalProduitPrixLv2 : 'prix affilier niveaux 2', 
 	modalProduitTag : 'Nom produit dans tag', 
 	/*****************************************************************/
 
@@ -29,6 +29,7 @@ module.exports = {
 	add : 'Ajouter' ,
 	ok : 'Ok' ,
 	cancel : 'Cancel' ,
+	edit_price : 'Edit prix' ,
 
 	/*****************************************************/
 	//lang des différent formulaire de l'application 
@@ -59,6 +60,12 @@ module.exports = {
 	SearchTagTitle : 'Tag a rechercher par pages' , 
 
 	SearchTagPage : '' ,
+
+	/*****************************************************/
+	//Section edition d'utilisateur   
+	/*****************************************************/
+	Manager_user : 'Manager d\'utilisateur' ,
+	product_price_user : 'Prix du produit pour {{user}}' ,
 
 	/*****************************************************/
 	//lang dans la page recherche  

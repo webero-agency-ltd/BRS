@@ -3,6 +3,7 @@ import reactDom from 'react-dom'
 import Token from './components/Token/'
 import Tagmanager from './components/Tagmanager/'
 import Produit from './components/Produit/'
+import Usermanager from './components/Usermanager/'
 
 import Modals from './components/Modale/'
 import { Container , Row , Col } from 'react-bootstrap';
@@ -18,6 +19,7 @@ declare global {
             'EditePageRecherche': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'Tagmanager': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'Produit': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'Usermanager': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }
 
@@ -102,6 +104,19 @@ class Application extends React.Component <appProps , appState>{
 
 	}
 
+	/*
+	*	Edition d'un prix d'un utilisateur en question
+	*/
+
+	EditePrice(){
+
+		this.handleShowModal( 
+			'EditePrice' , 
+			lang('modale_title_page_affiliet',{ name }) 
+		)
+
+	}
+
 	render(){
 
 
@@ -125,6 +140,12 @@ class Application extends React.Component <appProps , appState>{
 					editePage={ ( name )=> this.handleShowModal( 'EditeProduit' , lang( 'modalProduitTitle' ,{ name }) ) }
 					></Produit>
 			</div>
+
+			<div className="tspace-1">
+				<Usermanager
+					editePrice={ ()=> this.EditePrice() }
+					></Usermanager>
+			</div>	
 
 			<Modals 
 				title={ modalTitle }

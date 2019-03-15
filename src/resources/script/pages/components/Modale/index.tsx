@@ -6,8 +6,9 @@ import EditePageAffiliet from '../EditePageAffiliet/';
 import EditeProduit from '../EditeProduit/';
 import EditePageRecherche from '../EditePageRecherche/'
 import EditePageRechercheUser from '../EditePageRechercheUser/'
+import EditePrice from '../EditePrice/'
 
-let comps = { EditePageAffiliet , EditeProduit , EditePageRecherche , EditePageRechercheUser } ; 
+let comps = { EditePageAffiliet , EditeProduit , EditePageRecherche , EditePageRechercheUser , EditePrice } ; 
 
 interface modaleProps {
 

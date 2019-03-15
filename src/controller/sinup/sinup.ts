@@ -61,7 +61,7 @@ module.exports = async function ( req:Request, res:Response ) {
 		return res.response( {} ,500); 
 	}
 
-	User.create({family_name,given_name,email,password,contactId})
+	User.create({family_name,given_name,email,password,contactId,role:'user'})
 		.then(user => {
 			res.response( user , 200)
 		})

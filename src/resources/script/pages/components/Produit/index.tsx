@@ -68,12 +68,12 @@ export default class SearchTag extends React.Component<searchTagProps,searchTagS
 		return <Row>
 					<Col>
 			    		<ListGroup>
-						  	<ListGroup.Item variant="dark" >{lang('ProduitTitle')} <Badge className="on-hover btn-left" onClick={ ()=> editePage('Page 1') } pill variant="info">+ {lang('modalProduitNew')} </Badge></ListGroup.Item>
+						  	<ListGroup.Item variant="dark" >{lang('ProduitTitle')} <Badge className="on-hover btn-left" onClick={ ()=> editePage('Page 1') } pill variant="info">+ {lang('create')} </Badge></ListGroup.Item>
 						  	{produits.map((e)=>{
 						  		return <ListGroup.Item key={e.id}>
 						  			{e.name} 
-						  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="danger">{lang('modalProduitDelete')} </Badge>
-						  			<Badge className="on-hover btn-left" onClick={ ()=>this.edit( e ) } pill variant="info">{lang('modalProduitEdit')} </Badge>
+						  			<Badge className="on-hover btn-left" onClick={ ()=>this.supr( e ) } pill variant="danger">{lang('delete')} </Badge>
+						  			<Badge className="on-hover btn-left" onClick={ ()=>this.edit( e ) } pill variant="info">{lang('edit')} </Badge>
 						  		</ListGroup.Item>
 						  	})}
 						</ListGroup>	

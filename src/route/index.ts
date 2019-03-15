@@ -111,8 +111,8 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	app.post('/admin/produit',validator.bind({rull:'produitCreate'}),require('../controller/produit/create').bind({db})) ;
 	app.put('/admin/produit',validator.bind({rull:'produitUpdate'}),require('../controller/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
 	app.delete('/admin/produit',require('../controller/produit/delete').bind({db}));
+	app.post('/admin/produit/attache',require('../controller/produit/attache').bind({db}));
 	/****************************************************************/
-
 
 
 	/****************************************************************
@@ -120,15 +120,15 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	****************************************************************/
 	app.get('/admin',require('../controller/admin').bind({db})) ; 
 	app.get('/token',require('../controller/ifstToken').bind({db})) ; 
+	app.get('/affilier',require('../controller/infusionsoft/affilier').bind({db})) ;  
 	/****************************************************************/
 
-	/*
-	*	Récupération Affilier des utilisateur
-	*/
-	app.get('/affilier',require('../controller/infusionsoft/affilier').bind({db})) ;  
 
-	//Route des utilisateurs de l'application 
+	/****************************************************************
+	*	Route des utilisateurs de l'application  
+	****************************************************************/
 	app.get('/user',require('../controller/users/index').bind({db})) ; 
+	/****************************************************************/
 	
 	// Retourne de tout les route indiqué a la base du serveur pour le crée ensuite sur express js
 	return new Promise<boolean>( resolve => resolve( true ));

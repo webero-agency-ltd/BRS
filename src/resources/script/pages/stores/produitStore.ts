@@ -1,45 +1,18 @@
 
+import Store from './Store' ;
 
 import { produit } from '../interface/produit' ;
 
 declare type ChangeCallback = ( store : produitStore ) => void 
 
-export default class produitStore  {
+export default class produitStore extends Store  {
 	
 	public produits : produit[]
 
-	private callback : ChangeCallback[] = [] ; 
-
-	private static i : number  = 0; 
-
-	static increment(){
-
-		if (this.i===null) {
-			this.i = 0  ; 
-		}
-		return this.i++;
-	
-	}
-
 	constructor() {
-		
+
+		super() ; 
 		this.produits = [] ; 
-
-	}
-
-	onChange( cbl : ChangeCallback){
-		
-		this.callback.push( cbl ) ; 
-
-	}
-
-	/*
-	*	Alerté les composante qu'il y a des changements 
-	*/
-
-	alert(){
-
-		this.callback.forEach( cbl => cbl( this ) ) ; 
 
 	}
 
@@ -100,7 +73,6 @@ export default class produitStore  {
 
 	}
 
-
 	find() : Promise<boolean> {
 
 		return new Promise<boolean>( async (resolve) => { 
@@ -128,7 +100,6 @@ export default class produitStore  {
 
 	}
 
-
 	removeProduit( produit : produit ) : Promise<boolean> {
 		
 		return new Promise<any>( async (resolve) => { 
@@ -147,6 +118,35 @@ export default class produitStore  {
 			
 		}); 
 
+	}
+
+	/*
+	*	Attacher produit a un utilisateur 
+	*/
+	attacheProduit( product : produit , price : string ) : Promise<boolean> {
+
+		return new Promise<boolean>( async (resolve) => { 
+
+			let url = '/admin/produit/attache';
+
+			let response = await fetch( url ,{
+
+				method : 'POST' , 
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body : JSON.stringify({ id : product.id , price })
+
+			})
+
+			if ( response.ok ) {
+				return resolve( true ) ;
+			}
+
+			return resolve( false ) ;
+			
+		});
+		
 	}
 
 	/*

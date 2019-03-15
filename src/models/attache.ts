@@ -5,10 +5,11 @@ export interface AttacheAttributes {
 
     id?: number;
     type?: string;
+    text?: string;
     attachable_id?: number;
     attacha_id?: number;
 
-}; 
+};  
 
 export interface AttacheInstance extends Sequelize.Instance<AttacheAttributes>, AttacheAttributes {
     
@@ -18,6 +19,9 @@ export const AttacheFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequel
     
     const attributes: SequelizeAttributes<AttacheAttributes> = {
       type: {
+          type: DataTypes.STRING
+      },
+      text: {
           type: DataTypes.STRING
       },
       attachable_id: {

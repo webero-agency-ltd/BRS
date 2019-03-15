@@ -5,5 +5,5 @@ export interface produit{
 	prixLv1 : string
 	prixLv2 : string
 	tag : string
-	
+	prixUser? : string
 }
