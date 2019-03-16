@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard/'
 import Recherche from './components/Recherche/'
 import Affilier from './components/Affilier/'
 import NoMatch from './components/NoMatch/'
+import Loader from './components/Loader/'
 
 import lang from '../libs/lang' ;
 
@@ -43,6 +44,7 @@ interface appState {
 	modalComps : string 
 	modalTitle : string
 	modalBtn : object
+	Loadershow : boolean
 
 } 
 
@@ -55,6 +57,7 @@ class Application extends React.Component <appProps , appState>{
 
 		this.state = {
 
+			Loadershow  : true , 
 			Modale  : false , 
 			modalComps  : '' , 
 			modalTitle : '' ,
@@ -91,11 +94,27 @@ class Application extends React.Component <appProps , appState>{
 
 	}
 
+	closeLoader(){
+
+		setTimeout(()=>{
+			this.setState({Loadershow:false}) ; 
+		},1000)
+
+	}
+
+	shouldComponentUpdate( prop:appProps , state:appState ){
+
+		let ret = false ; 
+		(this.state.Loadershow != state.Loadershow)||
+		(this.state.Modale != state.Modale)
+		?ret=true:'';
+		return ret ;
+
+	}
+
 	render(){
 
-		const  {} = this.state
-
-		const { Modale , modalComps , modalTitle , modalBtn } = this.state
+		const { Modale , modalComps , modalTitle , modalBtn , Loadershow } = this.state
 
 		return <Router><Container>
 				<Row className="tspace-2 bspace-2">
@@ -114,12 +133,18 @@ class Application extends React.Component <appProps , appState>{
 					</Col>
 				</Row>
 				<Switch>
-					<Route exact path="/" component={Dashboard} />
-					<Route path="/recherche" 
-						component={ (props) => <Recherche editePageRecherche={ ()=> this.editePageRecherche() } />} 
+					<Route exact path="/" 
+						component={ (props) => <Dashboard closeLoader={ ()=> this.closeLoader() } />}
 						/>
-		        	<Route path="/affilier" component={Affilier} />
-					<Route component={NoMatch} />
+					<Route path="/recherche" 
+						component={ (props) => <Recherche closeLoader={ ()=> this.closeLoader() } editePageRecherche={ ()=> this.editePageRecherche() } />} 
+						/>
+		        	<Route path="/affilier" 
+		        		component={ (props) => <Affilier closeLoader={ ()=> this.closeLoader() } />}
+		        		/>
+					<Route 
+		        		component={ (props) => <NoMatch closeLoader={ ()=> this.closeLoader() } />}
+						/>
 				</Switch>
 				<Modals 
 					title={ modalTitle }
@@ -128,6 +153,8 @@ class Application extends React.Component <appProps , appState>{
 					btn={ modalBtn }
 					closeModal={ () => this.handleCloseModal() }
 					></Modals>
+				<Loader Show={Loadershow} ></Loader>
+
 		</Container></Router>
 
 	}

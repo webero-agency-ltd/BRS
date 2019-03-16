@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 interface modaleProps {
+	closeLoader : ( ) => void
 
 }
 

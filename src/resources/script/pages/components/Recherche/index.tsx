@@ -9,16 +9,17 @@ import contactsStore from '../../stores/contactsStore' ;
 import lang from '../../../libs/lang' ;
 
 
-interface searchTagProps {
+interface props {
 	editePageRecherche : ( ) => void
+	closeLoader : ( ) => void
 
 } 
 
-interface searchTagState {
+interface state {
 	contacts : contacts[]
 } 
 
-export default class Recherche extends React.Component<searchTagProps,searchTagState>{
+export default class Recherche extends React.Component<props,state>{
 
 	private store : contactsStore = new contactsStore()
 
@@ -31,17 +32,19 @@ export default class Recherche extends React.Component<searchTagProps,searchTagS
 		}
 
 		this.store.onChange(( store )=>{
+			console.log('..............................')
+			this.props.closeLoader() ; 
 			this.setState( {contacts : store.contacts }) ; 
 		})
 
 	}
 
-
 	componentDidMount(){
 
-		this.store.find() ;  
+		this.store.find() ; 
 
 	}
+
 
 	render(){
 

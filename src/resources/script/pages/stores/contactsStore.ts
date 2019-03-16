@@ -1,49 +1,19 @@
-
+import Store from './Store' ;
 
 import { contacts } from '../interface/contacts' ;
-
-declare type ChangeCallback = ( store : contactsStore ) => void 
-
-export default class contactsStore  {
+ 
+export default class contactsStore extends Store {
 	
 	public contacts : contacts[]
 
-	private callback : ChangeCallback[] = [] ; 
-
-	private static i : number  = 0; 
-
-	static increment(){
-
-		if (this.i===null) {
-			this.i = 0  ; 
-		}
-		return this.i++;
-	
-	}
-
 	constructor() {
-		
+		super() ; 
 		this.contacts = [] ; 
-
 	}
 
-	onChange( cbl : ChangeCallback){
-		
-		this.callback.push( cbl ) ; 
+	find() : Promise<boolean> {
 
-	}
-
-	/*
-	*	Alerté les composante qu'il y a des changements 
-	*/
-
-	alert(){
-		this.callback.forEach( cbl => cbl( this ) ) ; 
-	}
-
-	find() : Promise<string> {
-
-		return new Promise<string>( async (resolve) => { 
+		return new Promise<boolean>( async (resolve) => { 
 
 			let url = '/affilier';
 
@@ -51,13 +21,10 @@ export default class contactsStore  {
 
 			let data = {} ; 
 			let tags : contacts[] = [] ; 
-			let option : string = '1' ;
 
 			if ( response.ok ) { 
 
 				data = await response.json() ; 
-
-				console.log( data ) ; 
 
 				let usersData = Object.keys( data['users'] ) ; 
 				for( let u of usersData ){
@@ -76,7 +43,7 @@ export default class contactsStore  {
 
 			}
 
-			return resolve( option ) ;
+			return resolve( true ) ;
 			
 		});
 

@@ -7,7 +7,7 @@ import { contacts } from '../../interface/contacts' ;
 import contactsStore from '../../stores/contactsStore' ;
 
 interface searchTagProps {
-
+	closeLoader : ( ) => void
 } 
 
 interface searchTagState {

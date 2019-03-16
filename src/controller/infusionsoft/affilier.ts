@@ -138,4 +138,5 @@ module.exports = async function ( req:Request, res:Response ) {
 	return res.response( { users , tags : finale['tags'] } ,200) ;
 	*/
  
+	return res.response( { users : [] , tags : [] } ,200) ;
 };

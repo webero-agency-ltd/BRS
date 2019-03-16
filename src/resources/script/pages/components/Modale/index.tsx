@@ -47,9 +47,7 @@ export default class Modale extends React.Component <modaleProps , modaleStade>{
 
 	render(){
 
-		let { show , closeModal , type , title , btn } = this.props ; 
-
-		console.log( btn ) ; 
+		let { show , closeModal , type , title , btn } = this.props ;  
 
 		const TagName = comps[type] ;
 
