@@ -16,6 +16,7 @@ module.exports = {
 	    contacts : resolve('./script/pages/contacts'),
 	    admin : resolve('./script/pages/admin'),
 	    index : resolve('./script/pages/index'),
+	    forgot : resolve('./script/pages/forgot'),
 	},
 
 	mode: 'development' ,  

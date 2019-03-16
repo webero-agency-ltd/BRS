@@ -9,7 +9,7 @@
 
 	<body>
 		 
-		<main class="container center-b bspace-6">
+		<main id="main" class="container center-b bspace-6">
 			
 			<section class="autogrid section-title">
 				<div class="txtcenter">
@@ -25,15 +25,7 @@
 					<form action="#">
 						<ul class="is-unstyled">
 						    <li class="form-item">
-						      	<input id="input-id" class="form-input" type="text" placeholder="<%= locals.lang.user %>">
-						    </li>
-						    <li class="form-item">
-						      	<input id="input-pass" class="form-input" type="password" placeholder="<%= locals.lang.pass %>">
-						      	<span class="form-error"><%= locals.lang.user_error %></span>
-						    </li>
-						    <li class="form-item">
-						      	<input id="input-remember" type="checkbox" class="radio" name="radio" id="r1">
-						      	<label for="r1"><%= locals.lang.remember %></label>
+						      	<input id="input-email" class="form-input" type="text" placeholder="<%= locals.lang.email %>">
 						    </li>
 						</ul>
 					</form>
@@ -47,18 +39,28 @@
 				</button>
 			</div>
 			
-			<% if( locals.rememberToken ) { %>
-				<input id="input-remember-value" type="hidden" value="<%= locals.rememberToken %>" >
-			<% } %>
-
 			<div class="txtcenter tspace-6">
-			    <span><a class="under-hov col-hov" href="/forgot"><%= locals.lang.forgot %></a></span> | <span><a class="under-hov col-hov" href="/signup"><%= locals.lang.sign_up %></a></span>
+			    <span><a class="under-hov col-hov" href="/login"><%= locals.lang.login %></a></span> | <span><a class="under-hov col-hov" href="/signup"><%= locals.lang.sign_up %></a></span>
 			    
 			</div>
 
 		</main>
+
+
+		<main id="main-success" class="container center-b bspace-6"  style="display: none;">
+			
+			<section class="autogrid section-title">
+				<div class="txtcenter">
+					<h1><%= locals.lang.title %></h1><br>
+					<p></p>
+				</div>
+			</section>
+
+			<div id="alert-erreur" class="alert alert--success" role="alert" ><%= locals.lang.alert %></div>
+
+		</main>
 		
-		<script src="/assets/js/login.js"></script>
+		<script src="/assets/js/forgot.js"></script>
 	</body>
 
 </html>

@@ -13,6 +13,7 @@ module.exports = {
 	submit :'Se connecter' ,
 	forgot_pass :'Mot de passe Oublier' ,
 	sign_up :'Inscription' ,
+	forgot :'Mot de pass Oublier' ,
 
 
 }

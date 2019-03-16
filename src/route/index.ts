@@ -33,8 +33,8 @@ function guard(req, res, next) {
 	else if (req.user) {
         res.redirect('/');
     } else {
-        next();
-    }
+        next(); 
+    } 
  
 }
 
@@ -70,9 +70,8 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 
 	},require('../controller/login/login').bind({db}) );
 
-	app.get('/sinup',guard,require('../controller/sinup/').bind({db})) ; 
-
-	app.post('/sinup',validator.bind({rull:'sinup'}),require('../controller/sinup/sinup').bind({db})) ; 
+	app.get('/signup',guard,require('../controller/sinup/').bind({db})) ; 
+	app.post('/signup',validator.bind({rull:'sinup'}),require('../controller/sinup/sinup').bind({db})) ; 
 	
 	app.get('/logout', function(req, res){
 		//destruction de cookie rememberToken  
@@ -80,6 +79,9 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	  	req.logout();
 	  	res.redirect('/');
 	});
+	
+	app.get('/forgot',guard,require('../controller/forgotpass/').bind({db})) ; 
+	app.post('/forgot',guard,require('../controller/forgotpass/forgot').bind({db})) ; 
 	/****************************************************************/
 
 
