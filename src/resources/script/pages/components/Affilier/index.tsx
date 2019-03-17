@@ -1,20 +1,24 @@
 
 import * as React from 'react'
-import { Table , Row , Col } from 'react-bootstrap';
+
+import { Table , Row , Col , Container } from 'react-bootstrap';
 
 import { contacts } from '../../interface/contacts' ;
 
 import contactsStore from '../../stores/contactsStore' ;
 
-interface searchTagProps {
-	closeLoader : ( ) => void
+import Loader from '../Loader/'
+
+interface props {
+
 } 
 
-interface searchTagState {
+interface state {
 	contacts : contacts[]
+	Loadershow : boolean
 } 
 
-export default class Tableaux extends React.Component<searchTagProps,searchTagState>{
+export default class Tableaux extends React.Component<props,state>{
 
 	private store : contactsStore = new contactsStore(1)
 
@@ -23,14 +27,24 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 		super(props) ; 
 
 		this.state = {
-			contacts  :  [] , 
+			contacts  :  [] ,
+			Loadershow  : true , 
 		}
 
 		this.store.onChange(( store )=>{
-			console.log('..............................')
-			this.props.closeLoader() ; 
-			this.setState( {contacts : store.contacts }) ; 
+			console.log('..............................') 
+			this.setState( {contacts : store.contacts , Loadershow:false}) ; 
+			console.log ( store.contacts ) ; 
 		})
+
+	}
+
+	shouldComponentUpdate( prop:props , state:state ){
+
+		let ret = false ; 
+		(this.state.contacts != state.contacts)
+		?ret=true:'';
+		return ret ;
 
 	}
 
@@ -42,40 +56,44 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 
 	render(){
 
-		let { contacts } = this.state ; 
+		let { contacts , Loadershow } = this.state ; 
 
-		return <Row>
-			<Col>
-				<Table striped bordered hover>
-				  	<thead>
-				    	<tr>
-					      	<th>Date</th>
-					      	<th>Type</th>
-					      	<th>Produit</th>
-					      	<th>Prénom</th>
-					      	<th>Nom</th>
-					      	<th>Montant</th>
-					      	<th>Facture</th>
-				    	</tr>
-				  	</thead>
-				  	<tbody>
-					  	{contacts.map((e)=>{
-						    return <tr key={e.id} >
-						      	<td>...</td>
-						      	<td>{e.type}</td>
-						      	<td>{e.produit}</td>
-						      	<td>{e.last_name}</td>
-						      	<td>{e.first_name}</td>
-						      	<td>{e.prix} £</td>
-						      	<td>...</td>
-						    </tr>
-					  	})}
-				  	</tbody>
-				</Table>
-			</Col>
-		</Row>
+		return <Container>
+			<Row>
+				<Col>
+					<Table striped bordered hover>
+					  	<thead>
+					    	<tr>
+						      	<th>Date</th>
+						      	<th>Type</th>
+						      	<th>Produit</th>
+						      	<th>Prénom</th>
+						      	<th>Nom</th>
+						      	<th>Montant</th>
+						      	<th>Facture</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+						  	{contacts.map((e)=>{
+							    return <tr key={e.id} >
+							      	<td>{e.date}</td>
+							      	<td>{e.type}</td>
+							      	<td>{e.produit}</td>
+							      	<td>{e.last_name}</td>
+							      	<td>{e.first_name}</td>
+							      	<td>{e.prix} £</td>
+							      	<td>{e.payement}</td>
+							    </tr>
+						  	})}
+					  	</tbody>
+					</Table>
+				</Col>
+			</Row>
+			<Loader Show={Loadershow} ></Loader>
+			
+		</Container>
 	}
 
 
 
-}
+} 

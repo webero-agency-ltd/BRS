@@ -250,7 +250,7 @@ a.col-hov:hover{
 
 	position: fixed;
 	top: 0;left: 0;right: 0;bottom: 0;
-	background-color: rgba(0,0,0,0.08);
+	background-color: rgba(0,0,0,0.13);
 	text-align: center;
 	
 }
@@ -261,5 +261,6 @@ a.col-hov:hover{
 	top: 50%;
 	left: 50%;
 	transform: translate( -50% , -50% );
-
+	font-size: 22px;
+	
 }

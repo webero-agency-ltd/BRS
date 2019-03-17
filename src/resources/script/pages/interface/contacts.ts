@@ -7,6 +7,7 @@ export interface contacts{
 	type? : string
 	produit? : number
 	prix? : string
-
+	date? : string
+	payement? : string 
 }
 

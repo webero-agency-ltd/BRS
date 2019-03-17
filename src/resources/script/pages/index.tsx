@@ -1,7 +1,6 @@
 import * as React from 'react'
 import reactDom from 'react-dom'
 
-import Modals from './components/Modale/'
 import { Table , Nav , Container , Row , Col } from 'react-bootstrap';
 
 import Dashboard from './components/Dashboard/'
@@ -40,12 +39,6 @@ interface appProps {
 
 interface appState {
 
-	Modale : boolean 
-	modalComps : string 
-	modalTitle : string
-	modalBtn : object
-	Loadershow : boolean
-
 } 
 
 
@@ -57,64 +50,11 @@ class Application extends React.Component <appProps , appState>{
 
 		this.state = {
 
-			Loadershow  : true , 
-			Modale  : false , 
-			modalComps  : '' , 
-			modalTitle : '' ,
-			modalBtn : {} ,
-
 		}
 
 	}
 
-	/*
-	*	Close modale qui serait afficher 
-	*/
-	handleCloseModal(){
-
-		this.setState( { Modale: false , modalComps : '' , modalTitle : '' } ) ; 
-
-	}
-
-	/*
-	*	Affichage du modale 
-	*/
-
-	handleShowModal( modalComps : string , modalTitle : string , modalBtn = {} ){
-		this.setState( { Modale: true , modalComps , modalTitle , modalBtn } ) ; 
-	
-	}
-
-	editePageRecherche(){
-
-		this.handleShowModal(
-			'EditePageRechercheUser' , 
-			lang('tagmanager_page_recherche_user'),
-			{ submit: 'Ajouter tag' , cancel : lang('cancel')})
-
-	}
-
-	closeLoader(){
-
-		setTimeout(()=>{
-			this.setState({Loadershow:false}) ; 
-		},1000)
-
-	}
-
-	shouldComponentUpdate( prop:appProps , state:appState ){
-
-		let ret = false ; 
-		(this.state.Loadershow != state.Loadershow)||
-		(this.state.Modale != state.Modale)
-		?ret=true:'';
-		return ret ;
-
-	}
-
 	render(){
-
-		const { Modale , modalComps , modalTitle , modalBtn , Loadershow } = this.state
 
 		return <Router><Container>
 				<Row className="tspace-2 bspace-2">
@@ -134,27 +74,18 @@ class Application extends React.Component <appProps , appState>{
 				</Row>
 				<Switch>
 					<Route exact path="/" 
-						component={ (props) => <Dashboard closeLoader={ ()=> this.closeLoader() } />}
+						component={ (props) => <Dashboard />}
 						/>
 					<Route path="/recherche" 
-						component={ (props) => <Recherche closeLoader={ ()=> this.closeLoader() } editePageRecherche={ ()=> this.editePageRecherche() } />} 
+						component={ (props) => <Recherche />} 
 						/>
 		        	<Route path="/affilier" 
-		        		component={ (props) => <Affilier closeLoader={ ()=> this.closeLoader() } />}
+		        		component={ (props) => <Affilier/>}
 		        		/>
 					<Route 
-		        		component={ (props) => <NoMatch closeLoader={ ()=> this.closeLoader() } />}
+		        		component={ (props) => <NoMatch />}
 						/>
 				</Switch>
-				<Modals 
-					title={ modalTitle }
-					show={ Modale } 
-					type={ modalComps }
-					btn={ modalBtn }
-					closeModal={ () => this.handleCloseModal() }
-					></Modals>
-				<Loader Show={Loadershow} ></Loader>
-
 		</Container></Router>
 
 	}

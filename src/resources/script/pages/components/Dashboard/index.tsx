@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Table , Row , Col } from 'react-bootstrap';
 
 interface searchTagProps {
-	closeLoader : ( ) => void
+
 } 
 
 interface searchTagState {
