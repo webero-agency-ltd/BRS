@@ -107,10 +107,10 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 			<div>
 				<Form>
 					<Form.Group>
-					    <Form.Control value={ name } onChange={ this.updateTextTag } type="text" placeholder={ lang('modaltextTag') } />
+					    <Form.Control value={ name } onChange={ this.updateTextTag } type="text" placeholder={ lang('tag_name') } />
 					</Form.Group>
 					<Form.Group>
-					    <Form.Control value={ value } onChange={ this.updateValueTag } type="text" placeholder={ lang('modalvalueTag') } />
+					    <Form.Control value={ value } onChange={ this.updateValueTag } type="text" placeholder={ lang('tag_value') } />
 					</Form.Group> 
 				</Form>
 			</div>

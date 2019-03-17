@@ -16,7 +16,7 @@ interface searchTagState {
 
 export default class Tableaux extends React.Component<searchTagProps,searchTagState>{
 
-	private store : contactsStore = new contactsStore()
+	private store : contactsStore = new contactsStore(1)
 
 	constructor(props){
 
@@ -27,6 +27,8 @@ export default class Tableaux extends React.Component<searchTagProps,searchTagSt
 		}
 
 		this.store.onChange(( store )=>{
+			console.log('..............................')
+			this.props.closeLoader() ; 
 			this.setState( {contacts : store.contacts }) ; 
 		})
 

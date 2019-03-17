@@ -48,7 +48,11 @@ module.exports = {
 	tagmanager_page_affiliet : 'Tag de la page affilier' ,
 	tagmanager_page_recherche : 'Tag de la page recherche' ,
 	tagmanager_page_recherche_user : 'Mes recherche' ,
-	modale_title_page_affiliet : 'Ajoute de tag a la page affilier' , 	
+	modale_title_page_affiliet : 'Ajoute de tag a la page affilier' ,
+
+	//btn action  	
+	modale_btn_add_tag : 'Ajouter le tag' , 	
+	modale_btn_cancel_tag : 'Annulé et fermer' , 	
 
 	tag_rull1 : 'Avec AUCUNE de ces tag' , 
 	tag_rull2 : 'Avec TOUTES ces tag' , 
@@ -72,5 +76,12 @@ module.exports = {
 	/*****************************************************/
 
 	r_search_option : 'Tag a chercher',
+
+	//lang des reponses de l'affichange de contacnt 
+	level1 : 'Level 1' ,
+	level2 : 'Level 2' ,
+	commition_pas_encore_paye : 'Pas encore paye' ,
+	commition_en_Cours : 'En cours de payement' ,
+	commition_paye: 'Payer en totalité' ,
 
 }

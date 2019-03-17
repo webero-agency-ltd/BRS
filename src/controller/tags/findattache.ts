@@ -32,14 +32,9 @@ let findTags = async function ( tags , bdd ) : Promise<object[]> {
 module.exports = async function ( req:Request, res:Response ) {
 
 	let { Attache , Tag } = this.db as DbInterface ; 
-
-
-
-	//@todo: A changer par l'ID de l'utilisateur qui est connecté 
-	let user_id = 1 ; 
+ 
 	let	type = 'tag/page/search';
-	let	attachable_id = user_id ;
-
+	let	attachable_id =  req.user.id ;
 
 	Attache.findAll({ where : {
 		type ,

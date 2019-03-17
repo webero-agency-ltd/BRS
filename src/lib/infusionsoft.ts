@@ -8,6 +8,11 @@ const path = require('path') ;
 import { configSite } from '../interface/configSite';
 import { User } from '../interface/User';
 import { tagPageOption , infusionTag } from '../interface/tagPageOption';
+import randomDate from './randomDate';
+
+import moment = require('moment');
+
+let isdaterand = true ;
 
 class infusionsoftSDK {
 
@@ -164,7 +169,10 @@ class infusionsoftSDK {
 					}catch( e ){
 						jsondata = [] ; 
 					}
-					return resolve( jsondata ) ; 
+
+					return resolve( jsondata.map( e => {
+						return  { ...e ,date_applied: isdaterand?moment(randomDate()).format('DD-MM-YYYY'):moment(e.date_applied as string).format('DD-MM-YYYY') }
+					} ) ) ; 
 		        }
 				return resolve( [] ) ; 
 

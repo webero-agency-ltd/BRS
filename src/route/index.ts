@@ -135,5 +135,5 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	
 	// Retourne de tout les route indiqué a la base du serveur pour le crée ensuite sur express js
 	return new Promise<boolean>( resolve => resolve( true ));
-
+ 
 } 

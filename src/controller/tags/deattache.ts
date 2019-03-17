@@ -7,10 +7,8 @@ module.exports = function  ( req:Request, res:Response ) {
 
 	let { Attache } = this.db as DbInterface ; 
 
-	//@todo: A changer par l'ID de l'utilisateur qui est connecté 
-	let user_id = 1 ; 
 	let	type = 'tag/page/search';
-	let	attachable_id = user_id ;
+	let	attachable_id =  req.user.id ;
 	let	attacha_id = req.body.id ;
 
 	Attache.destroy({

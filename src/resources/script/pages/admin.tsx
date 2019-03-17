@@ -90,8 +90,8 @@ class Application extends React.Component <appProps , appState>{
 
 		this.handleShowModal( 
 			'EditePageAffiliet' , 
-			lang('modale_title_page_affiliet',{ name }) 
-		)
+			lang('modale_title_page_affiliet',{ name }),  
+			{ submit: lang('modale_btn_add_tag') , cancel : lang('modale_btn_cancel_tag')})
 
 	}
 
@@ -100,7 +100,7 @@ class Application extends React.Component <appProps , appState>{
 		this.handleShowModal(
 			'EditePageRecherche' , 
 			lang('tagmanager_page_recherche',{ name }),
-			{ submit: 'Crée le tag' , cancel : 'suprimer le tag'})
+			{ submit: lang('modale_btn_add_tag') , cancel : lang('modale_btn_cancel_tag')})
 
 	}
 

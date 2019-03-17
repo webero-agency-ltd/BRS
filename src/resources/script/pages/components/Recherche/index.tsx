@@ -21,7 +21,7 @@ interface state {
 
 export default class Recherche extends React.Component<props,state>{
 
-	private store : contactsStore = new contactsStore()
+	private store : contactsStore = new contactsStore(2)
 
 	constructor(props){
 

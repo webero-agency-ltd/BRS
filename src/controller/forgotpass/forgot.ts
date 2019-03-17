@@ -17,6 +17,8 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	let randomstring = Math.random().toString(36).slice(-8);
 
+	console.log( randomstring ) ; 
+
 	let password = await hash( randomstring ) ; 
 
 	User.find({ where:{email} })
