@@ -1,6 +1,6 @@
 
 import * as React from 'react'
-import { Table , Row , Col , Button , Container } from 'react-bootstrap';
+import { Table , Row , Col , Button , Container , Pagination } from 'react-bootstrap';
 
 import { contacts } from '../../interface/contacts' ;
 
@@ -18,12 +18,17 @@ interface props {
 
 interface state {
 	contacts : contacts[]
+	contactsShow : contacts[]
 	Loadershow : boolean
 	
 	Modale : boolean 
 	modalComps : string 
 	modalTitle : string
 	modalBtn : object 
+
+	//pagination information
+	perPage : number , 
+	pageShow : number , 
 
 } 
 
@@ -36,7 +41,7 @@ export default class Recherche extends React.Component<props,state>{
 		super(props) ; 
 
 		this.state = {
-
+			contactsShow : [] , 
 			contacts  :  [] , 
 			Loadershow  : true , 
 
@@ -45,21 +50,34 @@ export default class Recherche extends React.Component<props,state>{
 			modalTitle : '' ,
 			modalBtn : {} , 
 
+			perPage : 4 , 
+			pageShow : 1 , 
+
 		}
 
 		this.store.onChange(( store )=>{
 			console.log('..............................') 
-			this.setState( {contacts : store.contacts , Loadershow : false }) ; 
+			this.setState( {contactsShow : this.paginateListe( store.contacts ) ,contacts : store.contacts , Loadershow : false }) ; 
 			console.log ( store.contacts ) ;  
 		})
 
-		console.log('-------------mmmmmmmmmmmmmmmmmmmmmmmmmmmm')
+		console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmm')
+
+	}
+
+	paginateListe( contacts : contacts[]){
+
+		let liste = [...contacts].slice((this.state.pageShow-1) * this.state.perPage, (this.state.pageShow) * this.state.perPage) ; 
+		console.log( 'paginateListe' , liste ) ; 
+		return  liste ;
 
 	}
 
 	componentDidMount(){
 
 		this.store.find() ; 
+
+		console.log( '-------componentDidMount' ) ; 
 
 	}
 
@@ -78,6 +96,14 @@ export default class Recherche extends React.Component<props,state>{
 
 	}
 
+	changePage( page : number ){
+
+		console.log('--- Chage to The page',page) ;
+		this.setState( { pageShow: page } ) ; 
+		this.setState( { contactsShow : this.paginateListe( this.state.contacts ) } ) ;  
+
+ 	}
+
 	/*
 	*	Close modale qui serait afficher 
 	*/
@@ -90,7 +116,19 @@ export default class Recherche extends React.Component<props,state>{
 
 	render(){
 
-		let { contacts , Loadershow , modalTitle , Modale , modalComps , modalBtn } = this.state ;  
+		let { contactsShow , contacts , Loadershow , modalTitle , Modale , modalComps , modalBtn , perPage , pageShow } = this.state ;  
+
+		let items = [];
+
+		let page = Math.ceil( contacts.length / perPage ) ;
+
+		for (let number = 1; number <= page; number++) {
+		  	items.push(
+		    	<Pagination.Item onClick={ ()=> this.changePage(number) } key={number} active={number === pageShow}>
+		      		{number}
+		    	</Pagination.Item>,
+		  	);
+		}
 
 		return <Container> <Row>
 			<Col xs={12} >
@@ -111,7 +149,7 @@ export default class Recherche extends React.Component<props,state>{
 					    	</tr>
 					  	</thead>
 					  	<tbody>
-						  	{contacts.map((e)=>{
+						  	{contactsShow.map((e)=>{
 							    return <tr key={e.id} >
 							      	<td>{e.date}</td>
 							      	<td>{e.type}</td>
@@ -125,6 +163,10 @@ export default class Recherche extends React.Component<props,state>{
 					  	</tbody>
 					</Table>
 				</div>	
+			</Col>
+			<Col xs={12} >
+				{page>1?<Pagination>{items}</Pagination>:''}
+    			<br />
 			</Col>
 		</Row>
 		<Loader Show={Loadershow} ></Loader>

@@ -205,6 +205,8 @@ module.exports = async function ( req:Request, res:Response ) {
 	tagsName = data.map((e)=>{
 		return Mustache.render( e.value , { username }) ;
 	}) as [] ; 
+
+	console.log( tagsName ) ; 
 	
 	//ici on a les différent tag et on veut récupéré les ID de chaque tag
 	let resTag = await req.infusionsoft.tags() as object ;
@@ -218,13 +220,17 @@ module.exports = async function ( req:Request, res:Response ) {
 	let r : infusionTag[] = resTag['tags'] ; 
 	//on récupére ici les tag qui correspond a cella dans la page d'édition
 	tags = r.filter((e)=>{
+
+		console.log( e.name , tagsName.indexOf( e.name ) !== -1 ) ; 
 		if ( tagsName.indexOf( e.name ) !== -1 && parseInt(option) !== 1 ) {
 			return true;
 		}else if ( tagsName.indexOf( e.name ) == -1 && parseInt(option) == 1 ){
 			return true;
 		}
 		return  false ;
-	}); 
+	});
+	
+	console.log( tags )  ; 
 
 	//si le tag a afficher n'existe pas 
 	if ( tags.length == 0 ) {
