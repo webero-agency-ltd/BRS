@@ -8,7 +8,7 @@ declare global {
         interface IntrinsicElements {
             'Tableaux': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
-    }
+    } 
 }
 
 reactDom.render(

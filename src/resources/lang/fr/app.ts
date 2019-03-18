@@ -83,5 +83,8 @@ module.exports = {
 	commition_pas_encore_paye : 'Pas encore paye' ,
 	commition_en_Cours : 'En cours de payement' ,
 	commition_paye: 'Payer en totalité' ,
+	//filter
+	filter_last_name: 'Last Name' ,
+	filter_first_name: 'First Name' ,
 
 }

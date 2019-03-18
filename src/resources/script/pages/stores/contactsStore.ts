@@ -1,4 +1,6 @@
 import Store from './Store' ;
+import moment from 'moment' ;
+import { Moment } from 'moment' ;
 
 import { contacts } from '../interface/contacts' ;
  
@@ -40,7 +42,7 @@ export default class contactsStore extends Store {
 						id : data['users'][u]['user']['id'] as number ,
 						last_name : data['users'][u]['user']['last_name'] as string,
 						email : data['users'][u]['user']['email'] as string,
-						date : data['users'][u]['tags'][0]['date'] as string,
+						date : moment(data['users'][u]['tags'][0]['date'] as string, "DD-MM-YYYY") as Moment ,
 						payement :  data['users'][u]['user']['payement'] as string,
 						...data['users'][u]['info']
 					}, ...tags]

@@ -2,7 +2,7 @@
 import { Request , Response }  from 'express' ; 
 
 module.exports = function  ( req:Request, res:Response ) {
-
+ 
 	//récupération des fichers langue du login
 	req.lang('app') ; 
 

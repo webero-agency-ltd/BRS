@@ -1,3 +1,7 @@
+import { Moment } from 'moment' ;
+
+
+
 export interface contacts{
 
 	first_name? : string
@@ -5,9 +9,9 @@ export interface contacts{
 	id? : number
 	last_name? : string
 	type? : string
-	produit? : number
+	produit? : string
 	prix? : string
-	date? : string
+	date? : Moment
 	payement? : string 
 }
 

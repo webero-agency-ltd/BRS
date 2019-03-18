@@ -1,8 +1,13 @@
 
+
+html, body{
+	padding: 0;
+	margin: 0;
+}
+
 /*
 *	Stylisation des containeur 
 */
-
 .tspace-6{
 	margin-top: 6rem;
 }
@@ -34,7 +39,11 @@
 
 .container{
 	max-width: 100% ; 
-	max-width: 800px;
+}
+
+.over-content{
+	max-width: 100%;
+	overflow: auto;
 }
 
 .section-title{
@@ -262,5 +271,13 @@ a.col-hov:hover{
 	left: 50%;
 	transform: translate( -50% , -50% );
 	font-size: 22px;
+	
+}
+
+/*
+*	Stylisation du filter 
+*/
+
+.filter{
 	
 }
