@@ -5,7 +5,6 @@ import { Table , Nav , Container , Row , Col } from 'react-bootstrap';
 
 import Dashboard from './components/Dashboard/'
 import Recherche from './components/Recherche/'
-import Affilier from './components/Affilier/'
 import NoMatch from './components/NoMatch/'
 import Loader from './components/Loader/'
 
@@ -20,7 +19,6 @@ declare global {
         interface IntrinsicElements {
             'Dashboard': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'Recherche': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-            'Affilier': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'NoMatch': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }
@@ -77,10 +75,10 @@ class Application extends React.Component <appProps , appState>{
 						component={ (props) => <Dashboard />}
 						/>
 					<Route path="/recherche" 
-						component={ (props) => <Recherche />} 
+						component={ (props) => <Recherche page={2} pers={true} />} 
 						/>
 		        	<Route path="/affilier" 
-		        		component={ (props) => <Affilier/>}
+		        		component={ (props) => <Recherche page={1} pers={false} />}
 		        		/>
 					<Route 
 		        		component={ (props) => <NoMatch />}

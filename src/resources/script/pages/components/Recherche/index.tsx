@@ -29,7 +29,8 @@ interface filter{
 }
 
 interface props {
-
+	pers : boolean ,
+	page : number ,
 } 
 
 interface state {
@@ -58,7 +59,7 @@ interface state {
 
 export default class Recherche extends React.Component<props,state>{
 
-	private store : contactsStore = new contactsStore(2)
+	private store : contactsStore = new contactsStore(this.props.page)
 
 	constructor(props){
 
@@ -356,7 +357,9 @@ export default class Recherche extends React.Component<props,state>{
 
 		return <Container> <Row>
 			<Col xs={12} >
-				<Button variant="warning" onClick={ ()=> this.editePageRecherche() } >{lang('r_search_option')}</Button>
+				{this.props.pers?
+				<Button variant="warning" onClick={ ()=> this.editePageRecherche() } >{lang('r_search_option')}</Button>:''
+				}
 			</Col>
 			<Col xs={12} >
 				<div className="tspace-1 over-content" >
