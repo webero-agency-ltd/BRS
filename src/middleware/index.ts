@@ -19,6 +19,8 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const session = require('express-session');
 
+const oneHour       = 3600000;    // 3600000msec == 1hour
+
 module.exports = async function ( app : Application , db : DbInterface ) :Promise<boolean>{
 
 	/*
@@ -27,7 +29,9 @@ module.exports = async function ( app : Application , db : DbInterface ) :Promis
 
 	app.use(express.json());
 	
-	app.use('/assets',express.static(path.join(__dirname, '../resources/asset'))) ; 
+	app.use('/assets',express.static(path.join(__dirname, '../resources/asset'), {
+	 	maxAge : oneHour
+	})) ; 
 
 	// parse application/x-www-form-urlencoded
 	app.use(bodyParser.urlencoded({ extended: false }))

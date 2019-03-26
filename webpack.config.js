@@ -82,19 +82,19 @@ module.exports = {
 	plugins: [
 
 		new CopyWebpackPlugin([
-				{ 
-					from: resources('asset','src') , 
-					to: resources('asset')  
-				},
-				{ 
-					from: resources('lang','src') , 
-					to: resources('lang')
-				},
-				{ 
-					from: resources('views','src') , 
-					to: resources('views')
-				}
-			]),
+			{ 
+				from: resources('asset','src') , 
+				to: resources('asset')  
+			},
+			{ 
+				from: resources('lang','src') , 
+				to: resources('lang')
+			},
+			{ 
+				from: resources('views','src') , 
+				to: resources('views')
+			}
+		]),
 
 		new webpack.NoEmitOnErrorsPlugin(),
 		

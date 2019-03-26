@@ -11,6 +11,9 @@ module.exports = function ( req:Request, res:Response ) {
 	if (!req.isUser()) {
 		//s'il ny a pas alors on redirige vers la page login
         return res.redirect('/login');
+    }else if(req.user&&req.user.role=='admin'){
+    	//si l'utilisateur est connecté et qu'il est un administrateur 
+        return res.redirect('/admin');
     }
 
 	let { User } = this.db as DbInterface ; 

@@ -12,7 +12,7 @@ interface sinup{
 
 let submit = async function ( data : sinup , cbl : CallableFunction ) {
 				
-    let response = await fetch('/sinup',{
+    let response = await fetch('/signup',{
     	method : 'POST',
     	headers : {'Content-Type' : 'application/json'},
     	body : JSON.stringify( data )

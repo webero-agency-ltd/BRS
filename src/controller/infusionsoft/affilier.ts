@@ -181,7 +181,7 @@ module.exports = async function ( req:Request, res:Response ) {
 
 	let id = req.query.id ; 
 
-	let username = req.user.family_name + '_' + req.user.given_name ; 
+	let username = req.user.given_name + '_' + req.user.family_name ; 
 
 	let data : TagAttributes[] = []; 
 

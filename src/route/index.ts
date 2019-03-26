@@ -110,8 +110,8 @@ module.exports = async function ( app : Application , db : DbInterface ) : Promi
 	****************************************************************/
 	//les différent route du produit
 	app.get('/admin/produit',require('../controller/produit/index').bind({db})) ; 
-	app.post('/admin/produit',validator.bind({rull:'produitCreate'}),require('../controller/produit/create').bind({db})) ;
-	app.put('/admin/produit',validator.bind({rull:'produitUpdate'}),require('../controller/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
+	app.post('/admin/produit',validator.bind({rull:'produit/create'}),require('../controller/produit/create').bind({db})) ;
+	app.put('/admin/produit',require('../controller/produit/update').bind({db})) ; /*.validate('produitUpdate') ;*/
 	app.delete('/admin/produit',require('../controller/produit/delete').bind({db}));
 	app.post('/admin/produit/attache',require('../controller/produit/attache').bind({db}));
 	app.delete('/admin/produit/attache',require('../controller/produit/deattache').bind({db}));

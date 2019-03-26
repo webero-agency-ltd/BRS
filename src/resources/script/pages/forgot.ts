@@ -14,7 +14,7 @@ let submit = async function ( data : object , cbl : CallableFunction ) {
     })
 
     if ( response.ok ) { 
-    	let data = await response.json() ; 
+    	let data = await response.json() ;  
     	if (data.success) {
     		return cbl( true )
     	}

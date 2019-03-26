@@ -1,3 +1,5 @@
+//@documentation = OK 
+
 import * as React from 'react'
 import { Badge , Button , FormControl , ListGroup , Form } from 'react-bootstrap';
 
@@ -5,6 +7,9 @@ import lang from '../../../libs/lang' ;
 import { tag } from '../../interface/tag' ;
 import produitStore from '../../stores/produitStore' ;
 
+//interface de l'erreur 
+//ce varriable est utiliser dans le composante ReactJS 
+//pour Afficher les erreur de l'édition de formulaire sur le serveur 
 interface erreur{
 	name : string , 
 	prixLv1 : string , 
@@ -12,11 +17,13 @@ interface erreur{
 	tag : string , 
 }
 
-interface searchTagProps {
+//l'interface de la composante reactJS ( éxigence typescript )
+interface props {
 	close : ()=> void ,
 } 
 
-interface searchTagState {
+//l'interface de la state reactJS ( éxigence typescript )
+interface state {
 	
 	name : string , 
 	prixLv1 : string , 
@@ -28,7 +35,7 @@ interface searchTagState {
 
 } 
 
-export default class EditePage extends React.Component<searchTagProps,searchTagState>{
+export default class EditePage extends React.Component<props,state>{
 
 	private store : produitStore = new produitStore()
 
@@ -36,13 +43,16 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 		super(props) ; 
 
+		//initialisation des varriable de stat 
 		this.state = {
 
+			//information sur le produit 
 			name : '' , 
 			prixLv1 : '' , 
 			prixLv2 : '' , 
 			tag : '' , 
 
+			//initialisation des stat erreur 
 			errors : {
 				name : '' , 
 				prixLv1 : '' , 
@@ -52,6 +62,7 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 		}
 
+		//ici on bind les fonctions utiles 
 		this.updateName = this.updateName.bind(this);
 		this.updatePrixLv1 = this.updatePrixLv1.bind(this);
 		this.updatePrixLv2 = this.updatePrixLv2.bind(this);
@@ -59,27 +70,42 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 
 	}
 
+	/*
+	*	On a cliquer sur le button principale de submit  
+	*	du modale, on execute cette fonction 
+	*/
 	async onSubmite() {
 
-
+		//récupération des varriables utiles dans le state 
 		let { name , prixLv1 , prixLv2 , tag } = this.state ; 
 
+		//on Call la fonction du store qui se charge de l'enregistrement des donners dans le serveur 
 		let setStore = await this.store.addProduit( name , prixLv1 , prixLv2 , tag ) ; 
 
+		//apre que la request du serveur est OK, on vérifie s'il ny a pas d'erreur  
+		//si la réponse est un Object, il y a donc une erreur 
 		if ( setStore && typeof setStore == 'object' && Object.keys(setStore).length > 0 ) {
+			//on récupére l'erreur dans l'object et on l'assigne au stat error
 			let keys = Object.keys(setStore) ;
 			for(let index of keys ){
 				if ( Object.keys( this.state.errors ).includes( index ) ) 
 					this.state.errors[index] = setStore[index][0]
 			}
 			this.setState( {errors : this.state.errors} ) ; 
+			//apres ca, les erreurs seront afficher automatiquement dans le modale
 		}else{
+			//s'il ny a pas d'erreur, verme le modale et on réactualise la page admin 
 	    	this.props.close() ; 
+	    	//@todo : enlever cette reload et le changer en alert information  
 	    	window.location.reload() ; 
 	    }
 
 	}
 
+	/*
+	*	A chaque changement dans le forumulaire, 
+	*	ces fonction update le stats de reactjs des information du produit 
+	*/
 	updateName( e ){
 		this.setState({ name : (e.target as HTMLInputElement ).value }) ; 
 	}
@@ -95,6 +121,8 @@ export default class EditePage extends React.Component<searchTagProps,searchTagS
 	updateTag( e ){
 		this.setState({ tag : (e.target as HTMLInputElement ).value }) ; 
 	}
+
+	/********************************************************/
 
 	render(){
 		

@@ -5,6 +5,7 @@ module.exports = function  ( req:Request, res:Response ) {
  
 	//récupération des fichers langue du login
 	req.lang('app') ; 
+	req.lang('form') ; 
 
 	//voire si un utilisateur est connecté 
 	if (!req.isUser({role:'admin'})) {
